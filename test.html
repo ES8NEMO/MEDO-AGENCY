@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ready Blueprints | Sovereign Workforce</title>
+    <title>Sovereign Workforce | Institutional AI Deployment</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 
     <style>
-        /* --- 🎨 نفس المبادئ الإبداعية (بدون تغيير) --- */
+        /* --- 🎨 المبادئ الإبداعية (حميدة المبدع) --- */
         :root {
             --bg-dark: #000000;
             --text-main: #FFFFFF;
@@ -24,6 +24,7 @@
             padding: 0;
             box-sizing: border-box;
             -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -34,7 +35,7 @@
             overflow-x: hidden;
         }
 
-        /* --- نفس الخلفية السيادية --- */
+        /* --- 🏙️ الخلفية السيادية (مدمجة بدقة عالية) --- */
         .bg-layer {
             position: fixed;
             inset: 0;
@@ -60,7 +61,7 @@
             padding: 0 80px;
         }
 
-        /* --- نفس الهيدر --- */
+        /* --- 🧭 الهيدر (Navigation) مع الأنيميشن الجديد --- */
         header {
             padding: 40px 0;
             position: relative;
@@ -95,167 +96,69 @@
             letter-spacing: 0.25em;
             text-transform: uppercase;
             transition: var(--transition);
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        /* أنيميشن الخط السفلي الجديد */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--text-main);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .nav-links a:hover {
             color: var(--text-main);
         }
 
-        /* --- زر الرجوع (Back) بنفس أسلوب التصميم --- */
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin: 20px 0 40px;
-            text-decoration: none;
-            color: var(--text-muted);
-            font-size: 12px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            transition: var(--transition);
-        }
-
-        .back-link:hover {
-            color: var(--text-main);
-            transform: translateX(-5px);
-        }
-
-        /* --- نفس نمط Hero ولكن مخصص للصفحات الداخلية --- */
-        .page-hero {
-            padding: 60px 0 40px;
-        }
-
-        .page-hero h1 {
-            font-family: var(--font-serif);
-            font-size: clamp(40px, 6vw, 80px);
-            font-weight: 900;
-            line-height: 1.08;
-            letter-spacing: -0.03em;
-            margin-bottom: 30px;
-        }
-
-        .badge {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            display: inline-block;
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 8px 18px;
-            border-radius: 40px;
-        }
-
-        /* --- نفس نمط البطاقات للمحتوى --- */
-        .content-section {
-            padding: 40px 0 100px;
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 60px;
-        }
-
-        .main-content p {
-            font-size: 18px;
-            color: var(--text-muted);
-            margin-bottom: 30px;
-            line-height: 1.7;
-        }
-
-        .main-content h2 {
-            font-family: var(--font-serif);
-            font-size: 28px;
-            margin: 50px 0 20px;
-            font-weight: 700;
-        }
-
-        .main-content h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin: 30px 0 15px;
-            letter-spacing: -0.2px;
-        }
-
-        .main-content ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .main-content li {
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            color: var(--text-muted);
-            font-size: 15px;
-        }
-
-        .main-content li strong {
-            color: var(--text-main);
-            font-weight: 500;
-        }
-
-        /* --- نفس نمط البطاقة الجانبية (مطابق للـ card الأصلي) --- */
-        .info-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            padding: 40px;
-            border-radius: 24px;
-            backdrop-filter: blur(15px);
-            position: sticky;
-            top: 40px;
-        }
-
-        .info-card .price {
-            font-family: var(--font-serif);
-            font-size: 48px;
-            font-weight: 900;
-            margin: 20px 0 10px;
-        }
-
-        .info-card .price small {
-            font-size: 14px;
-            font-weight: 400;
-            color: var(--text-muted);
-        }
-
-        .info-card .divider {
-            height: 1px;
-            background: rgba(255,255,255,0.1);
-            margin: 30px 0;
-        }
-
-        .feature-list {
-            list-style: none;
-        }
-
-        .feature-list li {
-            padding: 12px 0;
-            color: var(--text-muted);
-            font-size: 14px;
+        /* --- 🏛️ القسم الرئيسي (Hero) --- */
+        .hero {
+            padding: 120px 0 100px;
+            min-height: 80vh;
             display: flex;
-            gap: 12px;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .feature-list li::before {
-            content: "✓";
-            color: var(--text-main);
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(50px, 8vw, 110px);
+            font-weight: 900;
+            line-height: 1.02;
+            letter-spacing: -0.03em;
+            margin-bottom: 40px;
         }
 
-        /* --- نفس الزر الرئيسي --- */
+        .hero p {
+            font-size: clamp(18px, 2vw, 22px);
+            max-width: 620px;
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-bottom: 60px;
+        }
+
         .btn-main {
             display: inline-block;
             background: var(--text-main);
             color: var(--bg-dark);
-            padding: 18px 42px;
+            padding: 22px 52px;
             border-radius: 14px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 16px;
             transition: var(--transition);
-            text-align: center;
-            width: 100%;
-            box-sizing: border-box;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            cursor: pointer;
+            border: none;
         }
 
         .btn-main:hover {
@@ -264,49 +167,134 @@
             background: #f0f0f0;
         }
 
-        .btn-outline {
-            display: inline-block;
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.3);
-            color: var(--text-main);
-            padding: 16px 40px;
-            border-radius: 14px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
-            transition: var(--transition);
-            text-align: center;
-            width: 100%;
-            margin-top: 15px;
-            box-sizing: border-box;
+        /* --- 💎 قسم الخدمات الهادئ (Deployment Models) --- */
+        .services {
+            padding: 100px 0 150px;
         }
 
-        .btn-outline:hover {
-            border-color: var(--text-main);
-            background: rgba(255,255,255,0.05);
-        }
-
-        /* --- نفس التذييل --- */
-        footer {
-            padding: 60px 0;
-            text-align: center;
-            opacity: 0.2;
-            font-size: 10px;
-            letter-spacing: 0.5em;
+        .section-label {
+            font-size: 11px;
             text-transform: uppercase;
+            letter-spacing: 0.4em;
+            color: var(--text-muted);
+            margin-bottom: 60px;
+            display: block;
         }
 
-        /* --- نفس الاستجابة --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        /* البطاقة مع أنيميشن الظهور عند التمرير (الجديد) */
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 50px 40px;
+            border-radius: 24px;
+            backdrop-filter: blur(15px);
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* أنيميشن الظهور عند التمرير */
+        .card.card-show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-12px);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+        }
+
+        .card.featured {
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+        }
+
+        .card-meta {
+            font-size: 10px;
+            font-family: monospace;
+            color: rgba(255,255,255,0.2);
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .card h3 {
+            font-family: var(--font-serif);
+            font-size: 32px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .card p {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-weight: 300;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 25px;
+        }
+
+        /* --- رسالة تأكيد التفاعل (Toast) --- */
+        .toast-message {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(255,255,255,0.95);
+            color: #000;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 2000;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+            white-space: nowrap;
+            font-family: var(--font-sans);
+            letter-spacing: 0.3px;
+        }
+
+        .toast-message.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* --- 📱 استجابة الهواتف (Responsiveness) --- */
         @media (max-width: 1100px) {
-            .content-grid { grid-template-columns: 1fr; gap: 40px; }
+            .grid { grid-template-columns: 1fr 1fr; }
             .container { padding: 0 40px; }
         }
 
         @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
             .nav-links { display: none; }
+            .hero h1 { font-size: 50px; }
             .container { padding: 0 25px; }
             header { padding: 25px 0; }
-            .info-card { position: relative; top: 0; }
+            .toast-message { white-space: normal; text-align: center; width: 90%; font-size: 12px; }
         }
     </style>
 </head>
@@ -318,81 +306,209 @@
     <header>
         <div class="container">
             <nav>
-                <a href="index.html" class="logo">Sovereign.AI</a>
+                <a href="#" class="logo" id="logoLink">Sovereign.AI</a>
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#">Workforce</a></li>
-                    <li><a href="#">Infrastructure</a></li>
-                    <li><a href="#">Governance</a></li>
+                    <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="workforce">Workforce</a></li>
+                    <li><a href="#" class="nav-link" data-page="infrastructure">Infrastructure</a></li>
+                    <li><a href="#" class="nav-link" data-page="governance">Governance</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main class="container">
-        <a href="index.html" class="back-link">← Back to Home</a>
-
-        <section class="page-hero">
-            <span class="badge">Tier: Essential</span>
-            <h1>Ready Blueprints</h1>
+        <section class="hero">
+            <h1>The Sovereign <br> Workforce.</h1>
+            <p>Deploy autonomous AI agents tailored for high-stakes corporate operations. Precision, security, and elite performance integrated into your existing infrastructure.</p>
+            <div>
+                <button class="btn-main" id="deployNowBtn">Deploy Now</button>
+            </div>
         </section>
 
-        <section class="content-section">
-            <div class="content-grid">
-                <div class="main-content">
-                    <p>Pre-configured AI structures designed for immediate implementation across your organization. These battle-tested blueprints represent the fastest path to autonomous workforce integration.</p>
-                    
-                    <h2>What's Included</h2>
-                    <p>Each Ready Blueprint comes pre-optimized for specific operational domains, reducing deployment time from months to days while maintaining enterprise-grade security standards.</p>
-                    
-                    <h3>📊 Analytics & Intelligence</h3>
-                    <p>Real-time data processing agents that integrate with existing BI tools, delivering actionable insights without custom training.</p>
-                    
-                    <h3>⚙️ Process Automation</h3>
-                    <p>Pre-trained workflow agents for document processing, data entry, report generation, and routine decision-making tasks.</p>
-                    
-                    <h3>🔒 Security-First Architecture</h3>
-                    <p>All blueprints include encrypted communications, role-based access controls, and audit logging out of the box.</p>
-                    
-                    <h2>Technical Specifications</h2>
-                    <ul>
-                        <li><strong>Deployment Time:</strong> 3-7 business days</li>
-                        <li><strong>Integration Options:</strong> REST API, Webhooks, Native SDKs</li>
-                        <li><strong>Supported Environments:</strong> Cloud, Hybrid, On-Premise</li>
-                        <li><strong>SLA Guarantee:</strong> 99.9% uptime</li>
-                        <li><strong>Support Included:</strong> 30 days priority email support</li>
-                    </ul>
+        <section class="services">
+            <span class="section-label">Deployment Models</span>
+            <div class="grid">
+                <!-- البطاقة 1 - Ready Blueprints -->
+                <div class="card" data-service="ready-blueprints">
+                    <span class="card-meta">Tier: Essential</span>
+                    <h3>Ready Blueprints</h3>
+                    <p>Pre-configured AI structures for immediate implementation. Optimized for general administrative and analytical tasks.</p>
+                    <div class="card-footer">Starting at $499</div>
                 </div>
 
-                <div class="info-card">
-                    <span class="card-meta" style="font-size: 10px; font-family: monospace;">ESSENTIAL TIER</span>
-                    <div class="price">$499 <small>/month</small></div>
-                    <p style="font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 10px;">Billed annually • One-time setup: $1,200</p>
-                    
-                    <div class="divider"></div>
-                    
-                    <ul class="feature-list">
-                        <li>Up to 10 active AI agents</li>
-                        <li>50,000 API calls / month</li>
-                        <li>Standard response time (24h)</li>
-                        <li>Email & knowledge base support</li>
-                        <li>Quarterly performance reviews</li>
-                    </ul>
-                    
-                    <div class="divider"></div>
-                    
-                    <a href="#" class="btn-main">Deploy Blueprint →</a>
-                    <a href="#" class="btn-outline">Request Consultation</a>
-                    
-                    <p style="font-size: 11px; color: rgba(255,255,255,0.3); text-align: center; margin-top: 25px;">14-day satisfaction guarantee</p>
+                <!-- البطاقة 2 - Custom Engineering (Featured) -->
+                <div class="card featured" data-service="custom-engineering">
+                    <span class="card-meta">Tier: Bespoke</span>
+                    <h3>Custom Engineering</h3>
+                    <p>Deep integration with your specific corporate DNA. Includes a 15-day elite performance and stability guarantee.</p>
+                    <div class="card-footer">Custom Quote</div>
+                </div>
+
+                <!-- البطاقة 3 - Continuous Partnership -->
+                <div class="card" data-service="continuous-partnership">
+                    <span class="card-meta">Tier: Sovereign</span>
+                    <h3>Continuous Partnership</h3>
+                    <p>Dedicated neural scaling and priority infrastructure access. Monthly subscription for long-term strategic growth.</p>
+                    <div class="card-footer">Monthly Retainer</div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
+    <footer style="padding: 60px 0; text-align: center; opacity: 0.2; font-size: 10px; letter-spacing: 0.5em; text-transform: uppercase;">
         Neural Architecture Deployment Platform © 2026
     </footer>
+
+    <!-- عنصر رسالة التأكيد -->
+    <div class="toast-message" id="toastMessage"></div>
+
+    <script>
+        // ============================================
+        // أنيميشن الظهور عند التمرير (من الكود الجديد)
+        // ============================================
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('card-show');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card) => observer.observe(card));
+
+        // ============================================
+        // وظيفة عرض رسالة تأكيد (Toast)
+        // ============================================
+        function showMessage(message) {
+            const toast = document.getElementById('toastMessage');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        // ============================================
+        // وظيفة محاكاة الانتقال إلى صفحة الخدمة
+        // ============================================
+        function navigateToService(serviceName, serviceTitle) {
+            // حفظ البيانات في localStorage لتظهر في الصفحة التالية
+            localStorage.setItem('selectedService', JSON.stringify({
+                name: serviceName,
+                title: serviceTitle,
+                timestamp: new Date().toISOString()
+            }));
+            
+            // عرض رسالة تأكيد ثم محاكاة الانتقال
+            showMessage(`✓ Redirecting to ${serviceTitle} — please wait...`);
+            
+            // بعد نصف ثانية، محاكاة الانتقال إلى صفحة الخدمة
+            setTimeout(() => {
+                alert(`✨ You are now entering the ${serviceTitle} deployment portal.\n\n(Complete integration with your infrastructure will begin here.)`);
+                showMessage(`✓ Welcome to ${serviceTitle} — ready for deployment`);
+            }, 600);
+        }
+
+        // ============================================
+        // التفاعلات: البطاقات الثلاث
+        // ============================================
+        const serviceMap = {
+            'ready-blueprints': {
+                name: 'ready-blueprints',
+                title: 'Ready Blueprints',
+                message: '⚡ Ready Blueprints: Pre-configured AI structures. Starting at $499/month.'
+            },
+            'custom-engineering': {
+                name: 'custom-engineering',
+                title: 'Custom Engineering',
+                message: '🔧 Custom Engineering: Bespoke AI integration with 15-day elite warranty.'
+            },
+            'continuous-partnership': {
+                name: 'continuous-partnership',
+                title: 'Continuous Partnership',
+                message: '🤝 Continuous Partnership: Monthly retainer for long-term strategic growth.'
+            }
+        };
+
+        // إضافة حدث النقر لكل بطاقة
+        document.querySelectorAll('.card').forEach(card => {
+            const serviceId = card.getAttribute('data-service');
+            if (serviceMap[serviceId]) {
+                card.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const service = serviceMap[serviceId];
+                    showMessage(service.message);
+                    navigateToService(service.name, service.title);
+                });
+            }
+        });
+
+        // ============================================
+        // زر Deploy Now
+        // ============================================
+        const deployBtn = document.getElementById('deployNowBtn');
+        if (deployBtn) {
+            deployBtn.addEventListener('click', () => {
+                showMessage('🚀 Initiating deployment sequence...');
+                setTimeout(() => {
+                    alert('Deployment Console Activated.\n\nSelect a deployment model to continue.');
+                    showMessage('✓ Deployment ready — choose your model above');
+                    // تمرير سلس إلى قسم الخدمات
+                    document.querySelector('.services').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                }, 500);
+            });
+        }
+
+        // ============================================
+        // روابط الهيدر (Navigation)
+        // ============================================
+        const navLinks = document.querySelectorAll('.nav-link');
+        const logoLink = document.getElementById('logoLink');
+        
+        const navActions = {
+            home: { message: '🏛 Returning to Sovereign Home', action: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
+            workforce: { message: '👥 Accessing AI Workforce Portal', action: () => alert('Workforce Deployment Dashboard\n\nManage autonomous AI agents across your organization.') },
+            infrastructure: { message: '🏗 Exploring Infrastructure Layer', action: () => alert('Infrastructure Control Center\n\nMonitor and scale your AI deployment architecture.') },
+            governance: { message: '⚖️ Entering Governance Protocol', action: () => alert('Governance & Compliance Hub\n\nSecurity, audit trails, and regulatory frameworks.') }
+        };
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = link.getAttribute('data-page');
+                if (navActions[page]) {
+                    showMessage(navActions[page].message);
+                    setTimeout(() => {
+                        navActions[page].action();
+                    }, 300);
+                }
+            });
+        });
+        
+        if (logoLink) {
+            logoLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showMessage('🏛 Sovereign.AI — Neural Architecture Platform');
+                setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 200);
+            });
+        }
+
+        // ============================================
+        // رسالة ترحيب عند تحميل الصفحة
+        // ============================================
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                showMessage('⚡ Sovereign Workforce ready — select a deployment model');
+            }, 800);
+        });
+    </script>
 
 </body>
 </html>
