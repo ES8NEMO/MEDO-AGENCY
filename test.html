@@ -3,213 +3,326 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign.AI | Elite Neural Deployment</title>
+    <title>Ready Blueprints | Sovereign Workforce</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 
     <style>
+        /* --- 🎨 نفس المبادئ الإبداعية (بدون تغيير) --- */
         :root {
-            --bg: #000000;
-            --text: #FFFFFF;
-            --muted: rgba(255,255,255,0.5);
-            --glass: rgba(255,255,255,0.03);
-            --border: rgba(255,255,255,0.08);
+            --bg-dark: #000000;
+            --text-main: #FFFFFF;
+            --text-muted: rgba(255, 255, 255, 0.6);
+            --accent-white: rgba(255, 255, 255, 0.1);
             --font-serif: 'Playfair Display', serif;
             --font-sans: 'Inter', sans-serif;
-            --transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
-        body { background: var(--bg); color: var(--text); font-family: var(--font-sans); overflow-x: hidden; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
 
-        /* --- الخلفية السيادية النخبوية --- */
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- نفس الخلفية السيادية --- */
         .bg-layer {
             position: fixed;
             inset: 0;
             z-index: -2;
             background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2560&auto=format&fit=crop') center/cover no-repeat;
-            filter: grayscale(100%) brightness(0.2);
+            filter: grayscale(100%) brightness(0.4);
             transform: scale(1.05);
         }
-        .overlay {
+
+        .bg-overlay {
             position: fixed;
             inset: 0;
             z-index: -1;
-            background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, transparent 50%, rgba(0,0,0,1) 100%);
+            background: linear-gradient(180deg, 
+                rgba(0,0,0,0.8) 0%, 
+                rgba(0,0,0,0.2) 50%, 
+                rgba(0,0,0,0.9) 100%);
         }
 
-        .container { max-width: 1440px; margin: 0 auto; padding: 0 80px; }
-
-        /* --- 🧭 الهيدر وأزرار التنقل (إعادة الإضافة والتفاعل) --- */
-        header { 
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 40px 0; 
-            backdrop-filter: blur(10px);
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 80px;
         }
 
-        nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-weight: 700; letter-spacing: 4px; font-size: 16px; text-transform: uppercase; color: var(--text); text-decoration: none;}
-
-        .nav-links { display: flex; list-style: none; gap: 40px; }
-        .nav-links a { 
-            text-decoration: none; 
-            color: var(--muted); 
-            font-size: 12px; 
-            letter-spacing: 0.25em; 
-            text-transform: uppercase; 
-            transition: var(--transition); 
+        /* --- نفس الهيدر --- */
+        header {
+            padding: 40px 0;
             position: relative;
-            padding-bottom: 5px;
+            z-index: 100;
         }
 
-        /* أنيميشن خط سفلي ينمو بهدوء */
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 1px;
-            background-color: var(--text);
-            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .nav-links a:hover::after { width: 100%; }
-        .nav-links a:hover { color: var(--text); }
-
-        /* --- 🏛️ الصفحة الرئيسية (الهادئة والمنفصلة) --- */
-        .main-content {
-            min-height: 100vh;
+        nav {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 10;
-            text-align: left;
         }
 
-        .hero h1 { 
-            font-family: var(--font-serif); 
-            font-size: clamp(50px, 8vw, 105px); 
-            line-height: 1.02; 
-            margin-bottom: 35px; 
-            letter-spacing: -0.03em; 
-        }
-
-        .hero p { 
-            color: var(--muted); 
-            max-width: 580px; 
-            font-size: 21px; 
-            font-weight: 300; 
-            line-height: 1.6; 
-        }
-
-        /* --- 💎 نظام البطاقات عند النزول (Scroll-Triggered Grid) --- */
-        .deployment-grid {
-            padding: 150px 0;
-            min-height: 100vh;
-            position: relative;
-            z-index: 10;
-        }
-
-        .grid-header {
-            font-size: 11px;
+        .logo {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--muted);
-            margin-bottom: 60px;
-            display: block;
+            text-decoration: none;
+            color: var(--text-main);
         }
 
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-
-        /* البطاقة النخبوية مع حركة مرور الماوس */
-        .card { 
-            background: var(--glass); 
-            border: 1px solid var(--border); 
-            padding: 60px 45px; 
-            border-radius: 28px; 
-            backdrop-filter: blur(20px); 
-            cursor: pointer; 
-            transition: var(--transition); 
-            text-decoration: none; /* للحفاظ على الشكل عند الضغط */
+        .nav-links {
             display: flex;
-            flex-direction: column;
-            color: inherit;
+            gap: 45px;
+            list-style: none;
         }
 
-        /* أنيميشن الظهور عند التمرير (Scroll Animation) */
-        .card-animate {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 12px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            transition: var(--transition);
         }
 
-        .card-animate.card-show {
-            opacity: 1;
-            transform: translateY(0);
+        .nav-links a:hover {
+            color: var(--text-main);
         }
 
-        /* تأثير مرور الماوس بأسلوب Apple */
-        .card:hover { 
-            transform: translateY(-15px) scale(1.01); 
-            border-color: rgba(255,255,255,0.3); 
-            background: rgba(255,255,255,0.08); 
-            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+        /* --- زر الرجوع (Back) بنفس أسلوب التصميم --- */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 20px 0 40px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: var(--transition);
         }
 
-        .card h3 { 
-            font-family: var(--font-serif); 
-            font-size: 32px; 
-            margin-bottom: 20px; 
-            font-weight: 700; 
-            color: var(--text);
+        .back-link:hover {
+            color: var(--text-main);
+            transform: translateX(-5px);
         }
 
-        .card p { 
-            color: var(--muted); 
-            font-size: 15px; 
-            margin-bottom: 40px; 
-            font-weight: 300; 
-            flex-grow: 1;
+        /* --- نفس نمط Hero ولكن مخصص للصفحات الداخلية --- */
+        .page-hero {
+            padding: 60px 0 40px;
         }
 
-        .card-footer { 
-            font-size: 10px; 
-            text-transform: uppercase; 
-            letter-spacing: 3px; 
-            opacity: 0.3; 
-            border-top: 1px solid rgba(255,255,255,0.1); 
-            padding-top: 25px; 
+        .page-hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(40px, 6vw, 80px);
+            font-weight: 900;
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            margin-bottom: 30px;
         }
 
-        @media (max-width: 1024px) {
-            .grid { grid-template-columns: 1fr; }
+        .badge {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 18px;
+            border-radius: 40px;
+        }
+
+        /* --- نفس نمط البطاقات للمحتوى --- */
+        .content-section {
+            padding: 40px 0 100px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 60px;
+        }
+
+        .main-content p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .main-content h2 {
+            font-family: var(--font-serif);
+            font-size: 28px;
+            margin: 50px 0 20px;
+            font-weight: 700;
+        }
+
+        .main-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 30px 0 15px;
+            letter-spacing: -0.2px;
+        }
+
+        .main-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .main-content li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        .main-content li strong {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* --- نفس نمط البطاقة الجانبية (مطابق للـ card الأصلي) --- */
+        .info-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 40px;
+            border-radius: 24px;
+            backdrop-filter: blur(15px);
+            position: sticky;
+            top: 40px;
+        }
+
+        .info-card .price {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            font-weight: 900;
+            margin: 20px 0 10px;
+        }
+
+        .info-card .price small {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .info-card .divider {
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 30px 0;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            color: var(--text-muted);
+            font-size: 14px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            color: var(--text-main);
+        }
+
+        /* --- نفس الزر الرئيسي --- */
+        .btn-main {
+            display: inline-block;
+            background: var(--text-main);
+            color: var(--bg-dark);
+            padding: 18px 42px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: var(--transition);
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .btn-main:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(255,255,255,0.1);
+            background: #f0f0f0;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: var(--text-main);
+            padding: 16px 40px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: var(--transition);
+            text-align: center;
+            width: 100%;
+            margin-top: 15px;
+            box-sizing: border-box;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text-main);
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* --- نفس التذييل --- */
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            opacity: 0.2;
+            font-size: 10px;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+        }
+
+        /* --- نفس الاستجابة --- */
+        @media (max-width: 1100px) {
+            .content-grid { grid-template-columns: 1fr; gap: 40px; }
             .container { padding: 0 40px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .container { padding: 0 25px; }
             header { padding: 25px 0; }
-            .hero h1 { font-size: 55px; }
+            .info-card { position: relative; top: 0; }
         }
     </style>
 </head>
 <body>
 
     <div class="bg-layer"></div>
-    <div class="overlay"></div>
+    <div class="bg-overlay"></div>
 
     <header>
         <div class="container">
             <nav>
-                <a href="#" class="logo">SOVEREIGN.AI</a>
-                
+                <a href="index.html" class="logo">Sovereign.AI</a>
                 <ul class="nav-links">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="#">Workforce</a></li>
                     <li><a href="#">Infrastructure</a></li>
-                    <li><a href="#">Insights</a></li>
                     <li><a href="#">Governance</a></li>
                 </ul>
             </nav>
@@ -217,53 +330,69 @@
     </header>
 
     <main class="container">
-        <section class="main-content">
-            <div class="hero">
-                <h1>The Sovereign <br> Workforce.</h1>
-                <p>Deploy autonomous AI agents tailored for high-stakes corporate operations. Precision, security, and elite performance.</p>
-            </div>
+        <a href="index.html" class="back-link">← Back to Home</a>
+
+        <section class="page-hero">
+            <span class="badge">Tier: Essential</span>
+            <h1>Ready Blueprints</h1>
         </section>
 
-        <section class="deployment-grid">
-            <span class="grid-header">Deployment Models</span>
-            
-            <div class="grid">
-                <a href="blueprints.html" class="card card-animate">
-                    <h3>Ready Blueprints</h3>
-                    <p>Immediate access to pre-configured AI structures. High efficiency, entry-level investment.</p>
-                    <div class="card-footer">Explore CATALOG →</div>
-                </a>
+        <section class="content-section">
+            <div class="content-grid">
+                <div class="main-content">
+                    <p>Pre-configured AI structures designed for immediate implementation across your organization. These battle-tested blueprints represent the fastest path to autonomous workforce integration.</p>
+                    
+                    <h2>What's Included</h2>
+                    <p>Each Ready Blueprint comes pre-optimized for specific operational domains, reducing deployment time from months to days while maintaining enterprise-grade security standards.</p>
+                    
+                    <h3>📊 Analytics & Intelligence</h3>
+                    <p>Real-time data processing agents that integrate with existing BI tools, delivering actionable insights without custom training.</p>
+                    
+                    <h3>⚙️ Process Automation</h3>
+                    <p>Pre-trained workflow agents for document processing, data entry, report generation, and routine decision-making tasks.</p>
+                    
+                    <h3>🔒 Security-First Architecture</h3>
+                    <p>All blueprints include encrypted communications, role-based access controls, and audit logging out of the box.</p>
+                    
+                    <h2>Technical Specifications</h2>
+                    <ul>
+                        <li><strong>Deployment Time:</strong> 3-7 business days</li>
+                        <li><strong>Integration Options:</strong> REST API, Webhooks, Native SDKs</li>
+                        <li><strong>Supported Environments:</strong> Cloud, Hybrid, On-Premise</li>
+                        <li><strong>SLA Guarantee:</strong> 99.9% uptime</li>
+                        <li><strong>Support Included:</strong> 30 days priority email support</li>
+                    </ul>
+                </div>
 
-                <a href="bespoke.html" class="card card-animate">
-                    <h3>Custom Engineering</h3>
-                    <p>Deep integration with your specific corporate DNA. One-time build with 15-day elite warranty.</p>
-                    <div class="card-footer">Start DESIGN →</div>
-                </a>
-
-                <a href="partnership.html" class="card card-animate">
-                    <h3>Elite Partnership</h3>
-                    <p>Bespoke build with monthly evolution & dedicated maintenance for long-term strategic growth.</p>
-                    <div class="card-footer">View Retainer PLAN →</div>
-                </a>
+                <div class="info-card">
+                    <span class="card-meta" style="font-size: 10px; font-family: monospace;">ESSENTIAL TIER</span>
+                    <div class="price">$499 <small>/month</small></div>
+                    <p style="font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 10px;">Billed annually • One-time setup: $1,200</p>
+                    
+                    <div class="divider"></div>
+                    
+                    <ul class="feature-list">
+                        <li>Up to 10 active AI agents</li>
+                        <li>50,000 API calls / month</li>
+                        <li>Standard response time (24h)</li>
+                        <li>Email & knowledge base support</li>
+                        <li>Quarterly performance reviews</li>
+                    </ul>
+                    
+                    <div class="divider"></div>
+                    
+                    <a href="#" class="btn-main">Deploy Blueprint →</a>
+                    <a href="#" class="btn-outline">Request Consultation</a>
+                    
+                    <p style="font-size: 11px; color: rgba(255,255,255,0.3); text-align: center; margin-top: 25px;">14-day satisfaction guarantee</p>
+                </div>
             </div>
         </section>
     </main>
 
-    <script>
-        // أنيميشن الظهور عند التمرير (Scroll-Triggered Animation)
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('card-show');
-                } else {
-                    entry.target.classList.remove('card-show');
-                }
-            });
-        });
-
-        const cards = document.querySelectorAll('.card-animate');
-        cards.forEach((card) => observer.observe(card));
-    </script>
+    <footer>
+        Neural Architecture Deployment Platform © 2026
+    </footer>
 
 </body>
 </html>
