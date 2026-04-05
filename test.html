@@ -3,759 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ready Blueprints | Sovereign Workforce</title>
-    
+    <title>Continuous Partnership | Sovereign Workforce</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-
     <style>
-        /* --- الأساسيات (نفس الكود الأصلي، لم يتغير شيء) --- */
         :root {
             --bg-dark: #000000;
             --text-main: #FFFFFF;
             --text-muted: rgba(255, 255, 255, 0.6);
-            --accent-white: rgba(255, 255, 255, 0.1);
             --font-serif: 'Playfair Display', serif;
             --font-sans: 'Inter', sans-serif;
             --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: var(--font-sans);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         .bg-layer {
-            position: fixed;
-            inset: 0;
-            z-index: -2;
+            position: fixed; inset: 0; z-index: -2;
             background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2560&auto=format&fit=crop') center/cover no-repeat;
             filter: grayscale(100%) brightness(0.4);
             transform: scale(1.05);
         }
-
         .bg-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            background: linear-gradient(180deg, 
-                rgba(0,0,0,0.8) 0%, 
-                rgba(0,0,0,0.2) 50%, 
-                rgba(0,0,0,0.9) 100%);
+            position: fixed; inset: 0; z-index: -1;
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.9) 100%);
         }
-
-        .container {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 80px;
-        }
-
-        /* --- الهيدر (نفس التصميم) --- */
-        header {
-            padding: 40px 0;
-            position: relative;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            text-decoration: none;
-            color: var(--text-main);
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin: 20px 0 40px;
-            text-decoration: none;
-            color: var(--text-muted);
-            font-size: 12px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            transition: var(--transition);
-        }
-
-        .back-link:hover {
-            color: var(--text-main);
-            transform: translateX(-5px);
-        }
-
-        /* --- Hero القسم --- */
-        .page-hero {
-            padding: 40px 0 30px;
-        }
-
-        .badge {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--text-muted);
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 8px 18px;
-            border-radius: 40px;
-            display: inline-block;
-            margin-bottom: 30px;
-        }
-
-        .page-hero h1 {
-            font-family: var(--font-serif);
-            font-size: clamp(40px, 6vw, 80px);
-            font-weight: 900;
-            line-height: 1.08;
-            letter-spacing: -0.03em;
-            margin-bottom: 20px;
-        }
-
-        .hero-description {
-            font-size: 18px;
-            color: var(--text-muted);
-            max-width: 700px;
-            margin-bottom: 20px;
-        }
-
-        /* --- السعر الرئيسي (Price Signature) --- */
-        .price-signature {
-            margin: 40px 0 60px;
-            border-left: 3px solid rgba(255,255,255,0.3);
-            padding-left: 30px;
-        }
-        .price-label {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--text-muted);
-            margin-bottom: 10px;
-        }
-        .price-number {
-            font-family: var(--font-serif);
-            font-size: 56px;
-            font-weight: 900;
-            color: var(--text-main);
-            line-height: 1;
-        }
-        .price-number small {
-            font-size: 20px;
-            font-weight: 400;
-            color: var(--text-muted);
-        }
-
-        /* --- وحدة التحكم الذكية (Smart Input Console) --- */
-        .smart-console {
-            margin: 80px 0 100px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 32px;
-            padding: 50px 40px;
-            border: 1px solid rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-        }
-
-        .console-title {
-            font-family: var(--font-serif);
-            font-size: 28px;
-            margin-bottom: 30px;
-            text-align: center;
-            letter-spacing: -0.3px;
-        }
-
-        /* صندوق النص التكيفي */
-        .adaptive-input-container {
-            position: relative;
-            width: 100%;
-            margin-bottom: 30px;
-        }
-
-        .adaptive-textarea {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 24px;
-            padding: 24px 28px;
-            color: var(--text-main);
-            font-family: var(--font-sans);
-            font-size: 18px;
-            font-weight: 400;
-            line-height: 1.6;
-            resize: vertical;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            backdrop-filter: blur(5px);
-        }
-
-        .adaptive-textarea:focus {
-            outline: none;
-            border-color: rgba(255,255,255,0.8);
-            box-shadow: 0 0 20px rgba(255,255,255,0.1);
-            background: rgba(255, 255, 255, 0.06);
-        }
-
-        /* المؤشر النابض */
-        @keyframes pulseGlow {
-            0% { text-shadow: 0 0 0px rgba(255,255,255,0); }
-            50% { text-shadow: 0 0 8px rgba(255,255,255,0.6); }
-            100% { text-shadow: 0 0 0px rgba(255,255,255,0); }
-        }
-        .adaptive-textarea:focus {
-            caret-color: white;
-            animation: pulseGlow 1.5s infinite;
-        }
-
-        /* شريط الأدوات (Toolbelt) */
-        .toolbelt {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 20px;
-        }
-
-        .tool-btn {
-            width: 52px;
-            height: 52px;
-            border-radius: 60px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            backdrop-filter: blur(8px);
-        }
-
-        .tool-btn svg {
-            width: 24px;
-            height: 24px;
-            stroke: var(--text-muted);
-            stroke-width: 1.5;
-            fill: none;
-            transition: all 0.2s;
-        }
-
-        .tool-btn:hover {
-            background: rgba(255,255,255,0.12);
-            border-color: rgba(255,255,255,0.4);
-            transform: translateY(-3px);
-        }
-        .tool-btn:hover svg {
-            stroke: var(--text-main);
-        }
-
-        /* الموجة الحية (تظهر عند التسجيل الصوتي) */
-        .waveform-animation {
-            display: none;
-            width: 100%;
-            height: 60px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 30px;
-            margin: 15px 0;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-        .wave-bar {
-            width: 4px;
-            height: 20px;
-            background: white;
-            border-radius: 2px;
-            animation: wave 0.8s infinite ease alternate;
-        }
-        @keyframes wave {
-            0% { height: 12px; opacity: 0.3; }
-            100% { height: 40px; opacity: 1; }
-        }
-
-        /* طبقة الموعد (Meet Overlay) */
-        .meet-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(12px);
-            z-index: 1000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-        .meet-card {
-            background: rgba(0,0,0,0.9);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 32px;
-            padding: 40px;
-            width: 400px;
-            text-align: center;
-        }
-        .meet-card h3 { font-family: var(--font-serif); margin-bottom: 25px; }
-        .meet-card button {
-            background: white;
-            color: black;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 40px;
-            margin: 10px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-        .close-meet {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.3);
-            color: white;
-        }
-
-        /* --- شبكة البطاقات الست (الفئات) --- */
-        .blueprints-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            margin: 60px 0 100px;
-        }
-
-        .micro-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 24px;
-            backdrop-filter: blur(15px);
-            padding: 35px 30px;
-            transition: var(--transition);
-            cursor: default;
-        }
-
-        .micro-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.06);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-        }
-
-        .micro-card h3 {
-            font-family: var(--font-serif);
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            letter-spacing: -0.3px;
-        }
-
-        .task-list {
-            list-style: none;
-            margin: 20px 0 25px;
-        }
-        .task-list li {
-            color: var(--text-muted);
-            font-size: 14px;
-            line-height: 1.7;
-            margin-bottom: 10px;
-            display: flex;
-            gap: 10px;
-        }
-        .task-list li::before {
-            content: "—";
-            color: var(--text-main);
-            opacity: 0.6;
-            font-weight: 300;
-        }
-
-        .micro-card-footer {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            color: rgba(255,255,255,0.4);
-        }
-
-        /* --- بطاقتي الخدمات الراقيتين (Custom & Elite) مع قوائم جانبية عند Hover --- */
-        .premium-cards {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin: 80px 0 60px;
-            justify-content: center;
-        }
-
-        .premium-card {
-            flex: 1;
-            min-width: 320px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 28px;
-            padding: 45px 35px;
-            backdrop-filter: blur(15px);
-            transition: all 0.3s ease;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .premium-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255,255,255,0.3);
-            background: rgba(255,255,255,0.08);
-        }
-
-        .premium-card h3 {
-            font-family: var(--font-serif);
-            font-size: 32px;
-            margin-bottom: 15px;
-        }
-        .premium-card .price-tag {
-            font-size: 14px;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            margin-bottom: 25px;
-            border-bottom: 1px dashed rgba(255,255,255,0.2);
-            display: inline-block;
-            padding-bottom: 5px;
-        }
-
-        /* القائمة الجانبية للميزات (تظهر عند Hover) */
-        .feature-sidebar {
-            position: absolute;
-            top: 0;
-            right: -280px;
-            width: 260px;
-            background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 20px;
-            padding: 20px;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 10;
-        }
-
-        .premium-card:hover .feature-sidebar {
-            opacity: 1;
-            transform: translateX(-20px);
-            pointer-events: none;
-        }
-
-        .feature-sidebar ul {
-            list-style: none;
-        }
-        .feature-sidebar li {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-        }
-        .feature-sidebar li strong {
-            color: white;
-            font-weight: 600;
-            display: block;
-            margin-bottom: 4px;
-        }
-        .micro-icon {
-            font-size: 18px;
-            min-width: 24px;
-        }
-
-        /* تذييل */
-        .return-link {
-            text-align: center;
-            margin: 40px 0 80px;
-        }
-        .return-link a {
-            display: inline-block;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 14px 32px;
-            border-radius: 40px;
-            text-decoration: none;
-            color: var(--text-muted);
-            font-size: 13px;
-            letter-spacing: 2px;
-            transition: var(--transition);
-        }
-        .return-link a:hover {
-            background: rgba(255,255,255,0.1);
-            color: var(--text-main);
-            transform: translateY(-3px);
-        }
-
-        footer {
-            padding: 60px 0;
-            text-align: center;
-            opacity: 0.2;
-            font-size: 10px;
-            letter-spacing: 0.5em;
-            text-transform: uppercase;
-        }
-
-        @media (max-width: 1200px) {
-            .feature-sidebar { display: none; }
-            .premium-card:hover .feature-sidebar { display: none; }
-        }
-        @media (max-width: 900px) {
-            .container { padding: 0 30px; }
-            .blueprints-grid { grid-template-columns: 1fr; }
-            .price-number { font-size: 42px; }
-            .premium-cards { flex-direction: column; }
-        }
+        .container { max-width: 1440px; margin: 0 auto; padding: 0 80px; }
+        header { padding: 40px 0; position: relative; z-index: 100; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 18px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; color: #fff; }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; margin: 20px 0 40px; text-decoration: none; color: rgba(255,255,255,0.5); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; transition: var(--transition); }
+        .back-link:hover { color: #fff; transform: translateX(-5px); }
+        .page-hero { padding: 40px 0 30px; }
+        .badge { font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.2); padding: 8px 18px; border-radius: 40px; display: inline-block; margin-bottom: 30px; }
+        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(40px, 6vw, 80px); font-weight: 900; line-height: 1.08; letter-spacing: -0.03em; margin-bottom: 20px; }
+        .price-quote { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; margin: 20px 0 40px; letter-spacing: -0.02em; border-left: 3px solid rgba(255,255,255,0.3); padding-left: 30px; }
+        .adaptive-textarea { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.15); border-radius: 24px; padding: 24px 28px; color: #fff; font-family: 'Inter', sans-serif; font-size: 18px; line-height: 1.6; resize: vertical; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); backdrop-filter: blur(5px); margin-bottom: 20px; }
+        .adaptive-textarea:focus { outline: none; border-color: rgba(255,255,255,0.8); box-shadow: 0 0 20px rgba(255,255,255,0.1); background: rgba(255,255,255,0.06); }
+        .button-group { display: flex; gap: 20px; margin-bottom: 50px; }
+        .action-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); padding: 14px 28px; border-radius: 40px; color: #fff; font-size: 14px; font-weight: 500; letter-spacing: 1px; cursor: pointer; transition: var(--transition); backdrop-filter: blur(5px); }
+        .action-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.5); transform: translateY(-2px); }
+        .feature-text { background: rgba(255,255,255,0.02); border-left: 2px solid rgba(255,255,255,0.3); padding: 30px; margin: 40px 0; border-radius: 16px; }
+        .feature-text h2 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 20px; font-weight: 700; letter-spacing: -0.3px; }
+        .feature-text p { color: rgba(255,255,255,0.7); font-size: 18px; line-height: 1.7; }
+        .return-link { text-align: center; margin: 40px 0 80px; }
+        .return-link a { display: inline-block; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 14px 32px; border-radius: 40px; text-decoration: none; color: rgba(255,255,255,0.5); font-size: 13px; letter-spacing: 2px; transition: var(--transition); }
+        .return-link a:hover { background: rgba(255,255,255,0.1); color: #fff; transform: translateY(-3px); }
+        .meet-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(12px); z-index: 1000; display: none; justify-content: center; align-items: center; }
+        .meet-card { background: rgba(0,0,0,0.95); border: 1px solid rgba(255,255,255,0.2); border-radius: 32px; padding: 40px; width: 400px; text-align: center; }
+        .meet-card h3 { font-family: 'Playfair Display', serif; margin-bottom: 25px; }
+        .meet-card button { background: white; color: black; border: none; padding: 12px 24px; border-radius: 40px; margin: 10px; cursor: pointer; font-weight: 600; }
+        .close-meet { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; }
+        footer { padding: 60px 0; text-align: center; opacity: 0.2; font-size: 10px; letter-spacing: 0.5em; text-transform: uppercase; }
+        @media (max-width: 900px) { .container { padding: 0 30px; } .button-group { flex-direction: column; } }
     </style>
 </head>
 <body>
-
 <div class="bg-layer"></div>
 <div class="bg-overlay"></div>
-
 <div class="container">
-    <header>
-        <nav>
-            <a href="test.html" class="logo">SOVEREIGN.AI</a>
-        </nav>
-    </header>
-
+    <header><nav><a href="test.html" class="logo">SOVEREIGN.AI</a></nav></header>
     <a href="test.html" class="back-link">← Return to Headquarters</a>
-
     <section class="page-hero">
-        <span class="badge">ESSENTIAL TIER</span>
-        <h1>Ready Blueprints</h1>
-        <p class="hero-description">Pre-configured AI structures for immediate implementation. Optimized for general administrative and analytical tasks.</p>
-        
-        <div class="price-signature">
-            <div class="price-label">Deployment</div>
-            <div class="price-number">$499.00<small> / month</small></div>
-        </div>
+        <span class="badge">SOVEREIGN TIER</span>
+        <h1>Continuous Partnership</h1>
+        <div class="price-quote">MONTHLY RETAINER</div>
     </section>
-
-    <!-- ========== وحدة التحكم الذكية ========== -->
-    <div class="smart-console">
-        <div class="console-title">⚡ Neural Input Console</div>
-        <div class="adaptive-input-container">
-            <textarea class="adaptive-textarea" rows="3" placeholder="Describe your project, vision, or requirements... The system listens and adapts." id="smartInput"></textarea>
-        </div>
-        <div class="toolbelt">
-            <!-- زر الصوت -->
-            <div class="tool-btn" id="audioBtn">
-                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" />
-                    <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-                    <line x1="12" y1="19" x2="12" y2="22" />
-                </svg>
-            </div>
-            <!-- زر الموعد -->
-            <div class="tool-btn" id="meetBtn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <circle cx="12" cy="12" r="10" />
-                    <line x1="12" y1="8" x2="12" y2="12" />
-                    <line x1="12" y1="16" x2="12.01" y2="16" />
-                </svg>
-            </div>
-            <!-- زر البريد -->
-            <div class="tool-btn" id="emailBtn">
-                <svg viewBox="0 0 24 24" stroke="currentColor">
-                    <rect x="2" y="4" width="20" height="16" rx="2" />
-                    <polyline points="22,7 12,13 2,7" />
-                </svg>
-            </div>
-        </div>
-        <div class="waveform-animation" id="waveform">
-            <div class="wave-bar" style="animation-delay:0s"></div>
-            <div class="wave-bar" style="animation-delay:0.1s"></div>
-            <div class="wave-bar" style="animation-delay:0.2s"></div>
-            <div class="wave-bar" style="animation-delay:0.3s"></div>
-            <div class="wave-bar" style="animation-delay:0.4s"></div>
-        </div>
+    <textarea class="adaptive-textarea" rows="4" placeholder="Describe your vision, growth targets, or strategic needs..."></textarea>
+    <div class="button-group">
+        <button class="action-btn" id="meetBtnElite">Schedule Meeting</button>
+        <button class="action-btn" id="emailBtnElite">Send Request</button>
     </div>
-
-    <!-- طبقة الموعد -->
-    <div id="meetModal" class="meet-overlay">
-        <div class="meet-card">
-            <h3>Schedule a Strategic Meet</h3>
-            <button data-time="Monday 10:00 AM">Mon 10:00 AM</button>
-            <button data-time="Wednesday 2:00 PM">Wed 2:00 PM</button>
-            <button data-time="Friday 11:00 AM">Fri 11:00 AM</button>
-            <br><br>
-            <button class="close-meet">Cancel</button>
-        </div>
+    <div class="feature-text">
+        <h2>THE NEURAL EVOLUTION | Elite Partnership Protocol</h2>
+        <p>The elite option is a strategic alliance that transcends traditional software boundaries; it is a "technological covenant" ensuring you remain at the pinnacle of the digital hierarchy. In this path, your system never stops learning but undergoes a continuous neural evolution to keep pace with the latest global technological advancements. You will receive sovereign dedicated clusters guaranteeing maximum processing priority, along with a dedicated AI Architect as your direct technical consultant to evolve system capabilities and expand its impact. This subscription is not a cost but an insurance policy for your company's future, providing monthly strategic intelligence reports that illuminate hidden growth opportunities, ensuring your technology always remains the most powerful and current on the global stage.</p>
     </div>
-
-    <!-- ========== الفئات الست الجاهزة ========== -->
-    <section>
-        <h2 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 40px; font-weight: 700;">📂 الفئات الست الجاهزة <span style="color: var(--text-muted); font-size: 18px;">(The Sovereign Blueprints)</span></h2>
-        <div class="blueprints-grid">
-            <!-- 1. Digital Receptionist -->
-            <div class="micro-card">
-                <h3>Digital Receptionist</h3>
-                <ul class="task-list">
-                    <li>الرد على استفسارات العملاء الأولية</li>
-                    <li>حجز المواعيد وتوجيه الزبائن للقسم الصحيح</li>
-                    <li>متاح 24/7، يتحدث لغات متعددة بلباقة Apple OS 26</li>
-                </ul>
-                <div class="micro-card-footer">موظف الاستقبال الذكي</div>
-            </div>
-            <!-- 2. Fiscal Auditor -->
-            <div class="micro-card">
-                <h3>Fiscal Auditor</h3>
-                <ul class="task-list">
-                    <li>تتبع المصاريف وتنظيم الفواتير</li>
-                    <li>استخراج تقارير الأرباح والخسائر من البيانات الخام</li>
-                    <li>دقة حسابية متناهية بدون أخطاء بشرية</li>
-                </ul>
-                <div class="micro-card-footer">المحاسب الرقمي</div>
-            </div>
-            <!-- 3. Executive Shadow -->
-            <div class="micro-card">
-                <h3>Executive Shadow</h3>
-                <ul class="task-list">
-                    <li>تنظيم جدول المواعيد وتلخيص رسائل البريد الطويلة</li>
-                    <li>كتابة الردود الرسمية نيابة عنك</li>
-                    <li>توفير 4 ساعات يومياً من وقت المدير التنفيذي</li>
-                </ul>
-                <div class="micro-card-footer">المساعد الشخصي النخبوي</div>
-            </div>
-            <!-- 4. Content Architect -->
-            <div class="micro-card">
-                <h3>Content Architect</h3>
-                <ul class="task-list">
-                    <li>بناء استراتيجية النشر على السوشيال ميديا</li>
-                    <li>صياغة التغريدات والمنشورات وتحليل التريندات</li>
-                    <li>حضور رقمي قوي ومستمر دون الحاجة لفريق تسويق كامل</li>
-                </ul>
-                <div class="micro-card-footer">معماري المحتوى</div>
-            </div>
-            <!-- 5. Data Scout -->
-            <div class="micro-card">
-                <h3>Data Scout</h3>
-                <ul class="task-list">
-                    <li>جمع معلومات عن المنافسين وتلخيص الملفات الضخمة</li>
-                    <li>البحث عن معلومات محددة في الإنترنت</li>
-                    <li>سرعة استجابة هائلة في تحويل البيانات إلى قرارات</li>
-                </ul>
-                <div class="micro-card-footer">باحث البيانات الإداري</div>
-            </div>
-            <!-- 6. Operations Coordinator -->
-            <div class="micro-card">
-                <h3>Operations Coordinator</h3>
-                <ul class="task-list">
-                    <li>متابعة مهام الفريق وإرسال تذكيرات للموظفين</li>
-                    <li>تنظيم الملفات داخل السحابة (Cloud)</li>
-                    <li>ضمان سلاسة العمل الإداري الداخلي</li>
-                </ul>
-                <div class="micro-card-footer">منسق العمليات</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== البطاقات الراقية: الهندسة المخصصة + الشراكة النخبوية ========== -->
-    <div class="premium-cards">
-        <!-- بطاقة Custom Engineering -->
-        <div class="premium-card">
-            <h3>Custom Engineering</h3>
-            <div class="price-tag">One-time Build</div>
-            <p style="color: rgba(255,255,255,0.5); font-size: 14px;">Bespoke AI core, tailored to your corporate DNA.</p>
-            <div class="feature-sidebar">
-                <ul>
-                    <li><span class="micro-icon">🧠</span><div><strong>Neural Blueprinting</strong><br>هيكل فريد لبياناتك</div></li>
-                    <li><span class="micro-icon">⚡</span><div><strong>Zero-Latency Integration</strong><br>ربط فوري مع أدواتك (CRM, Slack)</div></li>
-                    <li><span class="micro-icon">🛡️</span><div><strong>15-Day Elite Warranty</strong><br>ضمان ذهبي وتعديل السلوك</div></li>
-                    <li><span class="micro-icon">📄</span><div><strong>Ownership Transfer</strong><br>ملكية كاملة للأكواد والبيانات</div></li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- بطاقة Elite Partnership -->
-        <div class="premium-card">
-            <h3>Elite Partnership</h3>
-            <div class="price-tag">Monthly Retainer</div>
-            <p style="color: rgba(255,255,255,0.5); font-size: 14px;">Continuous evolution & dedicated infrastructure.</p>
-            <div class="feature-sidebar">
-                <ul>
-                    <li><span class="micro-icon">🔄</span><div><strong>Continuous Neural Evolution</strong><br>تحديثات دورية لأحدث تقنيات AI</div></li>
-                    <li><span class="micro-icon">👤</span><div><strong>Dedicated AI Architect</strong><br>مستشار تقني مباشر 24/7</div></li>
-                    <li><span class="micro-icon">🚀</span><div><strong>Priority Infrastructure</strong><br>خوادم فائقة السرعة مخصصة</div></li>
-                    <li><span class="micro-icon">📊</span><div><strong>Monthly Insight Reports</strong><br>تقارير استراتيجية للتوسع</div></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="return-link">
-        <a href="test.html">← Return to Headquarters</a>
-    </div>
-
-    <footer>
-        Neural Architecture Deployment Platform © 2026
-    </footer>
+    <div class="return-link"><a href="test.html">← Return to Headquarters</a></div>
+    <footer>Neural Architecture Deployment Platform © 2026</footer>
 </div>
-
+<div id="meetModalElite" class="meet-overlay">
+    <div class="meet-card">
+        <h3>Schedule a Strategic Meeting</h3>
+        <button data-time="Monday 10:00 AM">Mon 10:00 AM</button>
+        <button data-time="Wednesday 2:00 PM">Wed 2:00 PM</button>
+        <button data-time="Friday 11:00 AM">Fri 11:00 AM</button>
+        <br><br>
+        <button class="close-meet">Cancel</button>
+    </div>
+</div>
 <script>
-    // ========== التفاعلات بدون رسائل منبثقة ==========
     const textarea = document.querySelector('.adaptive-textarea');
-    const audioBtn = document.getElementById('audioBtn');
-    const meetBtn = document.getElementById('meetBtn');
-    const emailBtn = document.getElementById('emailBtn');
-    const waveform = document.getElementById('waveform');
-    const meetModal = document.getElementById('meetModal');
-    const closeMeet = document.querySelector('.close-meet');
-
-    // صندوق النص يتوسع تلقائياً
-    textarea.addEventListener('input', function() {
-        this.style.height = 'auto';
-        this.style.height = Math.min(250, this.scrollHeight) + 'px';
-        if (this.value.length > 0) {
-            this.style.borderColor = 'rgba(255,255,255,0.6)';
-        } else {
-            this.style.borderColor = 'rgba(255,255,255,0.15)';
-        }
-    });
-
-    // زر الصوت: يعرض موجة حية ثم يخفيها بعد 3 ثوانٍ
-    audioBtn.addEventListener('click', () => {
-        waveform.style.display = 'flex';
-        setTimeout(() => {
-            waveform.style.display = 'none';
-        }, 3000);
-    });
-
-    // زر الموعد: يفتح الطبقة الزجاجية
-    meetBtn.addEventListener('click', () => {
-        meetModal.style.display = 'flex';
-    });
-    closeMeet.addEventListener('click', () => {
-        meetModal.style.display = 'none';
-    });
-    document.querySelectorAll('[data-time]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            meetModal.style.display = 'none';
-            // لا رسالة، فقط إغلاق
-        });
-    });
-
-    // زر البريد: وميض بسيط (تأكيد بصري)
-    emailBtn.addEventListener('click', () => {
-        emailBtn.style.transform = 'scale(0.95)';
-        setTimeout(() => { emailBtn.style.transform = ''; }, 200);
-        // لا رسالة نصية
-    });
-
-    // إغلاق الطبقة عند النقر خارجها
-    window.addEventListener('click', (e) => {
-        if (e.target === meetModal) meetModal.style.display = 'none';
-    });
+    textarea.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = Math.min(300, this.scrollHeight) + 'px'; });
+    const meetBtn = document.getElementById('meetBtnElite');
+    const modal = document.getElementById('meetModalElite');
+    const closeBtn = document.querySelector('.close-meet');
+    meetBtn.onclick = () => { modal.style.display = 'flex'; };
+    closeBtn.onclick = () => { modal.style.display = 'none'; };
+    document.querySelectorAll('[data-time]').forEach(btn => { btn.onclick = () => { modal.style.display = 'none'; }; });
+    window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+    const emailBtn = document.getElementById('emailBtnElite');
+    emailBtn.onclick = () => { emailBtn.style.transform = 'scale(0.95)'; setTimeout(() => { emailBtn.style.transform = ''; }, 200); };
 </script>
-
 </body>
 </html>
