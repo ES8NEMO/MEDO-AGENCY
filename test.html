@@ -9,8 +9,8 @@
 
     <style>
         :root {
-            --bg: #000;
-            --text: #fff;
+            --bg: #000000;
+            --text: #FFFFFF;
             --muted: rgba(255,255,255,0.5);
             --glass: rgba(255,255,255,0.03);
             --border: rgba(255,255,255,0.08);
@@ -19,38 +19,115 @@
             --transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
         body { background: var(--bg); color: var(--text); font-family: var(--font-sans); overflow-x: hidden; }
 
-        /* --- الخلفية السيادية --- */
+        /* --- الخلفية السيادية النخبوية --- */
         .bg-layer {
             position: fixed;
             inset: 0;
             z-index: -2;
             background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2560&auto=format&fit=crop') center/cover no-repeat;
-            filter: grayscale(100%) brightness(0.3);
-            transform: scale(1.1);
+            filter: grayscale(100%) brightness(0.2);
+            transform: scale(1.05);
         }
         .overlay {
             position: fixed;
             inset: 0;
             z-index: -1;
-            background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, transparent 50%, rgba(0,0,0,0.95) 100%);
+            background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, transparent 50%, rgba(0,0,0,1) 100%);
         }
 
         .container { max-width: 1440px; margin: 0 auto; padding: 0 80px; }
 
-        /* --- الهيدر --- */
-        header { padding: 50px 0; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 10; }
-        .logo { font-weight: 700; letter-spacing: 4px; font-size: 16px; text-transform: uppercase; }
+        /* --- 🧭 الهيدر وأزرار التنقل (إعادة الإضافة والتفاعل) --- */
+        header { 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 40px 0; 
+            backdrop-filter: blur(10px);
+        }
 
-        /* --- واجهة Hero --- */
-        .hero { padding: 100px 0 60px; position: relative; z-index: 10; transition: var(--transition); }
-        .hero h1 { font-family: var(--font-serif); font-size: clamp(50px, 8vw, 105px); line-height: 1.02; margin-bottom: 35px; letter-spacing: -0.03em; }
-        .hero p { color: var(--muted); max-width: 580px; font-size: 21px; font-weight: 300; margin-bottom: 60px; line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 700; letter-spacing: 4px; font-size: 16px; text-transform: uppercase; color: var(--text); text-decoration: none;}
 
-        /* --- نظام البطاقات --- */
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; position: relative; z-index: 10; }
+        .nav-links { display: flex; list-style: none; gap: 40px; }
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--muted); 
+            font-size: 12px; 
+            letter-spacing: 0.25em; 
+            text-transform: uppercase; 
+            transition: var(--transition); 
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        /* أنيميشن خط سفلي ينمو بهدوء */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--text);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: var(--text); }
+
+        /* --- 🏛️ الصفحة الرئيسية (الهادئة والمنفصلة) --- */
+        .main-content {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+            text-align: left;
+        }
+
+        .hero h1 { 
+            font-family: var(--font-serif); 
+            font-size: clamp(50px, 8vw, 105px); 
+            line-height: 1.02; 
+            margin-bottom: 35px; 
+            letter-spacing: -0.03em; 
+        }
+
+        .hero p { 
+            color: var(--muted); 
+            max-width: 580px; 
+            font-size: 21px; 
+            font-weight: 300; 
+            line-height: 1.6; 
+        }
+
+        /* --- 💎 نظام البطاقات عند النزول (Scroll-Triggered Grid) --- */
+        .deployment-grid {
+            padding: 150px 0;
+            min-height: 100vh;
+            position: relative;
+            z-index: 10;
+        }
+
+        .grid-header {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--muted);
+            margin-bottom: 60px;
+            display: block;
+        }
+
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+
+        /* البطاقة النخبوية مع حركة مرور الماوس */
         .card { 
             background: var(--glass); 
             border: 1px solid var(--border); 
@@ -59,72 +136,62 @@
             backdrop-filter: blur(20px); 
             cursor: pointer; 
             transition: var(--transition); 
+            text-decoration: none; /* للحفاظ على الشكل عند الضغط */
+            display: flex;
+            flex-direction: column;
+            color: inherit;
         }
+
+        /* أنيميشن الظهور عند التمرير (Scroll Animation) */
+        .card-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card-animate.card-show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* تأثير مرور الماوس بأسلوب Apple */
         .card:hover { 
-            transform: translateY(-15px); 
-            border-color: rgba(255,255,255,0.25); 
-            background: rgba(255,255,255,0.06); 
+            transform: translateY(-15px) scale(1.01); 
+            border-color: rgba(255,255,255,0.3); 
+            background: rgba(255,255,255,0.08); 
+            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
         }
-        .card h3 { font-family: var(--font-serif); font-size: 32px; margin-bottom: 20px; }
-        .card p { color: var(--muted); font-size: 15px; margin-bottom: 40px; font-weight: 300; }
-        .card-footer { font-size: 10px; text-transform: uppercase; letter-spacing: 3px; opacity: 0.3; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 25px; }
 
-        /* --- رحلة التخصيص (The Modal) --- */
-        .modal { 
-            position: fixed; 
-            inset: 0; 
-            background: rgba(0,0,0,0.96); 
-            z-index: 1000; 
-            display: none; 
-            align-items: center; 
-            justify-content: center; 
-            backdrop-filter: blur(40px); 
-            opacity: 0; 
-            transition: 0.6s ease;
+        .card h3 { 
+            font-family: var(--font-serif); 
+            font-size: 32px; 
+            margin-bottom: 20px; 
+            font-weight: 700; 
+            color: var(--text);
         }
-        .modal.active { display: flex; opacity: 1; }
-        .modal-content { width: 100%; max-width: 750px; padding: 60px; position: relative; text-align: center; }
-        
-        .step { display: none; }
-        .step.active { display: block; animation: stepFadeIn 0.8s ease forwards; }
-        @keyframes stepFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .step-label { font-size: 11px; text-transform: uppercase; letter-spacing: 5px; color: var(--muted); margin-bottom: 25px; display: block; }
-        .step h2 { font-family: var(--font-serif); font-size: 40px; margin-bottom: 40px; }
-        
-        .options { display: grid; gap: 12px; }
-        .opt-btn { 
-            background: rgba(255,255,255,0.04); 
-            border: 1px solid var(--border); 
-            padding: 25px; 
-            border-radius: 15px; 
-            color: #fff; 
-            text-align: left; 
-            cursor: pointer; 
-            transition: 0.3s; 
-            font-size: 16px; 
+        .card p { 
+            color: var(--muted); 
+            font-size: 15px; 
+            margin-bottom: 40px; 
+            font-weight: 300; 
+            flex-grow: 1;
         }
-        .opt-btn:hover { background: #fff; color: #000; transform: scale(1.02); }
 
-        /* --- شاشة النجاح --- */
-        #success-state { display: none; text-align: center; animation: stepFadeIn 1s forwards; }
-        .input-elegant { 
-            width: 100%; 
-            background: transparent; 
-            border: none; 
-            border-bottom: 1px solid var(--border); 
-            color: #fff; 
-            padding: 15px; 
-            font-size: 18px; 
-            margin: 30px 0; 
-            text-align: center; 
-            outline: none; 
+        .card-footer { 
+            font-size: 10px; 
+            text-transform: uppercase; 
+            letter-spacing: 3px; 
+            opacity: 0.3; 
+            border-top: 1px solid rgba(255,255,255,0.1); 
+            padding-top: 25px; 
         }
-        .close-trigger { position: absolute; top: 40px; right: 40px; color: var(--muted); cursor: pointer; font-size: 11px; letter-spacing: 2px; }
 
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) {
             .grid { grid-template-columns: 1fr; }
-            .container { padding: 0 30px; }
+            .container { padding: 0 40px; }
+            header { padding: 25px 0; }
+            .hero h1 { font-size: 55px; }
         }
     </style>
 </head>
@@ -133,120 +200,70 @@
     <div class="bg-layer"></div>
     <div class="overlay"></div>
 
-    <header class="container">
-        <div class="logo">SOVEREIGN.AI</div>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">SOVEREIGN.AI</a>
+                
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Workforce</a></li>
+                    <li><a href="#">Infrastructure</a></li>
+                    <li><a href="#">Insights</a></li>
+                    <li><a href="#">Governance</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main class="container" id="main-ui">
-        <section class="hero">
-            <h1>The Sovereign <br> Workforce.</h1>
-            <p>Deploy autonomous AI agents tailored for institutional DNA. Precision, security, and elite performance.</p>
+    <main class="container">
+        <section class="main-content">
+            <div class="hero">
+                <h1>The Sovereign <br> Workforce.</h1>
+                <p>Deploy autonomous AI agents tailored for high-stakes corporate operations. Precision, security, and elite performance.</p>
+            </div>
         </section>
 
-        <div class="grid">
-            <div class="card" onclick="openModal('blueprints')">
-                <h3>Ready Blueprints</h3>
-                <p>Personal, Social Media, and Admin agents for immediate deployment.</p>
-                <div class="card-footer">Explore Catalog →</div>
+        <section class="deployment-grid">
+            <span class="grid-header">Deployment Models</span>
+            
+            <div class="grid">
+                <a href="blueprints.html" class="card card-animate">
+                    <h3>Ready Blueprints</h3>
+                    <p>Immediate access to pre-configured AI structures. High efficiency, entry-level investment.</p>
+                    <div class="card-footer">Explore CATALOG →</div>
+                </a>
+
+                <a href="bespoke.html" class="card card-animate">
+                    <h3>Custom Engineering</h3>
+                    <p>Deep integration with your specific corporate DNA. One-time build with 15-day elite warranty.</p>
+                    <div class="card-footer">Start DESIGN →</div>
+                </a>
+
+                <a href="partnership.html" class="card card-animate">
+                    <h3>Elite Partnership</h3>
+                    <p>Bespoke build with monthly evolution & dedicated maintenance for long-term strategic growth.</p>
+                    <div class="card-footer">View Retainer PLAN →</div>
+                </a>
             </div>
-            <div class="card" onclick="openModal('bespoke')">
-                <h3>Custom Engineering</h3>
-                <p>One-time specialized build with 15-day elite performance warranty.</p>
-                <div class="card-footer">Start Designing →</div>
-            </div>
-            <div class="card" onclick="openModal('partnership')">
-                <h3>Elite Partnership</h3>
-                <p>Bespoke build with continuous neural evolution & dedicated maintenance.</p>
-                <div class="card-footer">Enter Retainer →</div>
-            </div>
-        </div>
+        </section>
     </main>
 
-    <div class="modal" id="masterModal">
-        <div class="modal-content">
-            <div class="close-trigger" onclick="closeModal()">CLOSE [X]</div>
-            
-            <div id="survey-flow">
-                <div class="step active" id="s-interact">
-                    <span class="step-label">Module 01: Interaction</span>
-                    <h2>How should your <br> agent interact?</h2>
-                    <div class="options">
-                        <button class="opt-btn" onclick="nextStep('s-special')">01. Text-Only Pulse</button>
-                        <button class="opt-btn" onclick="nextStep('s-special')">02. Audio-Link (Listen/Write)</button>
-                        <button class="opt-btn" onclick="nextStep('s-voice')">03. Full Vocal Synthesis</button>
-                    </div>
-                </div>
-
-                <div class="step" id="s-voice">
-                    <span class="step-label">Module 01.5: Vocal Texture</span>
-                    <h2>Define the <br> agent's voice.</h2>
-                    <div class="options">
-                        <button class="opt-btn" onclick="nextStep('s-special')">Male - Deep & Strong</button>
-                        <button class="opt-btn" onclick="nextStep('s-special')">Female - Velvet & Calm</button>
-                        <button class="opt-btn" onclick="nextStep('s-special')">Neutral - Professional</button>
-                    </div>
-                </div>
-
-                <div class="step" id="s-special">
-                    <span class="step-label">Module 02: Specialization</span>
-                    <h2>Primary Expertise <br> Domain?</h2>
-                    <div class="options">
-                        <button class="opt-btn" onclick="nextStep('s-final')">Financial Intelligence</button>
-                        <button class="opt-btn" onclick="nextStep('s-final')">Strategic Operations</button>
-                        <button class="opt-btn" onclick="nextStep('s-final')">Legal Research Scout</button>
-                    </div>
-                </div>
-
-                <div class="step" id="s-final">
-                    <span class="step-label">Module 03: Finalization</span>
-                    <h2>Configuration <br> is Ready.</h2>
-                    <p style="color: var(--muted); margin-bottom: 30px;">Initialize the deployment to proceed to our neural engineers.</p>
-                    <button class="opt-btn" style="background:#fff; color:#000; text-align:center; font-weight:700;" onclick="showSuccess()">FINALIZE DEPLOYMENT</button>
-                </div>
-            </div>
-
-            <div id="success-state">
-                <span style="font-family:monospace; font-size:11px; color:var(--muted); letter-spacing:3px;">ID: SQ-2026-NEURAL</span>
-                <h1 style="font-family: var(--font-serif); font-size: 50px; margin: 20px 0;">Thank You for <br> Your Vision.</h1>
-                <p style="color: var(--muted); font-weight:300;">Your request is being analyzed. Please provide your business credentials to secure your consultation.</p>
-                
-                <input type="text" class="input-elegant" id="contact" placeholder="Gmail or Google Meet Link">
-                
-                <button class="opt-btn" style="background:#fff; color:#000; width:100%; text-align:center; font-weight:700;" onclick="finish()">SECURE APPOINTMENT</button>
-                <div style="margin-top:30px; font-size:10px; color:var(--muted); letter-spacing:3px;">EST. RESPONSE: 12-24 HOURS</div>
-            </div>
-        </div>
-    </div>
-
     <script>
-        function openModal() {
-            document.getElementById('masterModal').classList.add('active');
-            document.getElementById('main-ui').style.filter = 'blur(20px)';
-        }
-        function closeModal() {
-            document.getElementById('masterModal').classList.remove('active');
-            document.getElementById('main-ui').style.filter = 'none';
-            setTimeout(reset, 600);
-        }
-        function nextStep(id) {
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-        }
-        function showSuccess() {
-            document.getElementById('survey-flow').style.display = 'none';
-            document.getElementById('success-state').style.display = 'block';
-        }
-        function reset() {
-            document.getElementById('survey-flow').style.display = 'block';
-            document.getElementById('success-state').style.display = 'none';
-            nextStep('s-interact');
-        }
-        function finish() {
-            if(document.getElementById('contact').value) {
-                alert("Credentials secured. We will contact you shortly.");
-                closeModal();
-            } else { alert("Please provide contact info."); }
-        }
+        // أنيميشن الظهور عند التمرير (Scroll-Triggered Animation)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('card-show');
+                } else {
+                    entry.target.classList.remove('card-show');
+                }
+            });
+        });
+
+        const cards = document.querySelectorAll('.card-animate');
+        cards.forEach((card) => observer.observe(card));
     </script>
+
 </body>
 </html>
