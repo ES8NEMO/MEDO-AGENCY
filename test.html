@@ -3,360 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sovereign Workforce | Institutional AI Deployment</title>
-    
+    <title>Continuous Partnership | Sovereign Workforce</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-
     <style>
-        /* --- 🎨 المبادئ الإبداعية (حميدة المبدع) --- */
         :root {
             --bg-dark: #000000;
             --text-main: #FFFFFF;
             --text-muted: rgba(255, 255, 255, 0.6);
-            --accent-white: rgba(255, 255, 255, 0.1);
             --font-serif: 'Playfair Display', serif;
             --font-sans: 'Inter', sans-serif;
             --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: var(--font-sans);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* --- 🏙️ الخلفية السيادية --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; }
         .bg-layer {
-            position: fixed;
-            inset: 0;
-            z-index: -2;
+            position: fixed; inset: 0; z-index: -2;
             background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2560&auto=format&fit=crop') center/cover no-repeat;
             filter: grayscale(100%) brightness(0.4);
-            transform: scale(1.05);
         }
-
         .bg-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            background: linear-gradient(180deg, 
-                rgba(0,0,0,0.8) 0%, 
-                rgba(0,0,0,0.2) 50%, 
-                rgba(0,0,0,0.9) 100%);
+            position: fixed; inset: 0; z-index: -1;
+            background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.95) 100%);
         }
-
-        .container {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 80px;
-        }
-
-        /* --- 🧭 الهيدر (Navigation) --- */
-        header {
-            padding: 40px 0;
-            position: relative;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            text-transform: uppercase;
-            text-decoration: none;
-            color: var(--text-main);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 45px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-size: 12px;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            transition: var(--transition);
-            position: relative;
-            padding-bottom: 5px;
-        }
-
-        /* أنيميشن الخط السفلي */
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 1px;
-            background-color: var(--text-main);
-            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-main);
-        }
-
-        /* --- 🏛️ القسم الرئيسي (Hero) --- */
-        .hero {
-            padding: 120px 0 100px;
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .hero h1 {
-            font-family: var(--font-serif);
-            font-size: clamp(50px, 8vw, 110px);
-            font-weight: 900;
-            line-height: 1.02;
-            letter-spacing: -0.03em;
-            margin-bottom: 40px;
-        }
-
-        .hero p {
-            font-size: clamp(18px, 2vw, 22px);
-            max-width: 620px;
-            color: var(--text-muted);
-            font-weight: 300;
-            margin-bottom: 60px;
-        }
-
-        .btn-main {
-            display: inline-block;
-            background: var(--text-main);
-            color: var(--bg-dark);
-            padding: 22px 52px;
-            border-radius: 14px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            transition: var(--transition);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-main:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 30px 60px rgba(255,255,255,0.1);
-            background: #f0f0f0;
-        }
-
-        /* --- 💎 قسم الخدمات --- */
-        .services {
-            padding: 100px 0 150px;
-        }
-
-        .section-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.4em;
-            color: var(--text-muted);
-            margin-bottom: 60px;
-            display: block;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        /* البطاقة مع أنيميشن الظهور عند التمرير */
-        .card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            padding: 50px 40px;
-            border-radius: 24px;
-            backdrop-filter: blur(15px);
-            position: relative;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        /* أنيميشن الظهور عند التمرير */
-        .card.card-show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.25);
-            transform: translateY(-12px);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
-        }
-
-        .card.featured {
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.4);
-        }
-
-        .card-meta {
-            font-size: 10px;
-            font-family: monospace;
-            color: rgba(255,255,255,0.2);
-            margin-bottom: 30px;
-            display: block;
-        }
-
-        .card h3 {
-            font-family: var(--font-serif);
-            font-size: 32px;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        .card p {
-            font-size: 15px;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            font-weight: 300;
-            flex-grow: 1;
-        }
-
-        .card-footer {
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 25px;
-        }
-
-        /* --- 📱 استجابة الهواتف --- */
-        @media (max-width: 1100px) {
-            .grid { grid-template-columns: 1fr 1fr; }
-            .container { padding: 0 40px; }
-        }
-
-        @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
-            .hero h1 { font-size: 50px; }
-            .container { padding: 0 25px; }
-            header { padding: 25px 0; }
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+        header { padding: 40px 0; }
+        .logo { font-size: 18px; font-weight: 700; text-transform: uppercase; text-decoration: none; color: #fff; }
+        .back-link { display: inline-block; margin: 20px 0 40px; color: rgba(255,255,255,0.5); text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .back-link:hover { color: #fff; transform: translateX(-5px); }
+        .page-hero { padding: 40px 0 30px; }
+        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 64px; font-weight: 900; margin-bottom: 20px; }
+        .badge { font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.2); padding: 8px 18px; border-radius: 40px; display: inline-block; }
+        .content { padding: 40px 0 100px; display: grid; grid-template-columns: 2fr 1fr; gap: 60px; }
+        .main-content p { color: rgba(255,255,255,0.6); font-size: 18px; line-height: 1.7; margin-bottom: 30px; }
+        .main-content h2 { font-family: 'Playfair Display', serif; font-size: 32px; margin: 50px 0 20px; }
+        .main-content ul { list-style: none; }
+        .main-content li { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); color: rgba(255,255,255,0.6); }
+        .main-content li strong { color: #fff; }
+        .info-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 40px; border-radius: 24px; backdrop-filter: blur(15px); position: sticky; top: 40px; border-color: rgba(255,255,255,0.2); }
+        .price { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 900; margin: 20px 0 10px; }
+        .price small { font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.5); }
+        .divider { height: 1px; background: rgba(255,255,255,0.1); margin: 30px 0; }
+        .feature-list li { padding: 12px 0; color: rgba(255,255,255,0.6); display: flex; gap: 12px; }
+        .feature-list li::before { content: "✓"; color: #fff; }
+        .btn-main { display: block; background: #fff; color: #000; padding: 16px; border-radius: 14px; text-decoration: none; font-weight: 600; text-align: center; transition: 0.3s; }
+        .btn-main:hover { transform: translateY(-3px); background: #f0f0f0; }
+        .btn-outline { display: block; background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 16px; border-radius: 14px; text-decoration: none; font-weight: 500; text-align: center; margin-top: 15px; transition: 0.3s; }
+        .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
+        footer { padding: 60px 0; text-align: center; opacity: 0.2; font-size: 10px; letter-spacing: 0.5em; }
+        @media (max-width: 900px) { .content { grid-template-columns: 1fr; } .container { padding: 0 25px; } .page-hero h1 { font-size: 42px; } }
     </style>
 </head>
 <body>
-
     <div class="bg-layer"></div>
     <div class="bg-overlay"></div>
-
-    <header>
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo">Sovereign.AI</a>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#">Workforce</a></li>
-                    <li><a href="#">Infrastructure</a></li>
-                    <li><a href="#">Governance</a></li>
+    <div class="container">
+        <header><a href="index.html" class="logo">SOVEREIGN.AI</a></header>
+        <a href="index.html" class="back-link">← Back to Home</a>
+        <section class="page-hero">
+            <span class="badge">TIER: SOVEREIGN</span>
+            <h1>Continuous Partnership</h1>
+        </section>
+        <section class="content">
+            <div class="main-content">
+                <p>Dedicated neural scaling and priority infrastructure access. A true partnership for long-term strategic growth with monthly evolution cycles.</p>
+                <h2>What's Included</h2>
+                <p>Continuous model improvement, priority infrastructure access, and strategic AI consulting. Your organization grows with our platform.</p>
+                <h2>Technical Specifications</h2>
+                <ul>
+                    <li><strong>Deployment Time:</strong> Ongoing / Continuous</li>
+                    <li><strong>Integration Options:</strong> Full API + Custom Integrations</li>
+                    <li><strong>Supported Environments:</strong> Any + Dedicated Infrastructure</li>
+                    <li><strong>SLA Guarantee:</strong> 99.999% uptime with 24/7 dedicated support</li>
                 </ul>
-            </nav>
-        </div>
-    </header>
-
-    <main class="container">
-        <section class="hero">
-            <h1>The Sovereign <br> Workforce.</h1>
-            <p>Deploy autonomous AI agents tailored for high-stakes corporate operations. Precision, security, and elite performance integrated into your existing infrastructure.</p>
-            <div>
-                <a href="#" class="btn-main" id="deployNowBtn">Deploy Now</a>
+            </div>
+            <div class="info-card">
+                <div class="price">Monthly <small>Retainer</small></div>
+                <p style="font-size: 13px; color: rgba(255,255,255,0.4);">Month-to-month • No long-term commitment</p>
+                <div class="divider"></div>
+                <ul class="feature-list">
+                    <li>Unlimited AI agents</li>
+                    <li>Unlimited API calls</li>
+                    <li>Instant emergency response</li>
+                    <li>Dedicated strategic team</li>
+                    <li>Priority infrastructure access</li>
+                    <li>Monthly evolution cycles</li>
+                </ul>
+                <div class="divider"></div>
+                <a href="#" class="btn-main">Start Partnership →</a>
+                <a href="#" class="btn-outline">Talk to Strategy Team</a>
             </div>
         </section>
-
-        <section class="services">
-            <span class="section-label">Deployment Models</span>
-            <div class="grid">
-                <!-- البطاقة 1 - Ready Blueprints -->
-                <a href="page-ready-blueprints.html" class="card">
-                    <span class="card-meta">Tier: Essential</span>
-                    <h3>Ready Blueprints</h3>
-                    <p>Pre-configured AI structures for immediate implementation. Optimized for general administrative and analytical tasks.</p>
-                    <div class="card-footer">Starting at $499</div>
-                </a>
-
-                <!-- البطاقة 2 - Custom Engineering (Featured) -->
-                <a href="page-custom-engineering.html" class="card featured">
-                    <span class="card-meta">Tier: Bespoke</span>
-                    <h3>Custom Engineering</h3>
-                    <p>Deep integration with your specific corporate DNA. Includes a 15-day elite performance and stability guarantee.</p>
-                    <div class="card-footer">Custom Quote</div>
-                </a>
-
-                <!-- البطاقة 3 - Continuous Partnership -->
-                <a href="page-continuous-partnership.html" class="card">
-                    <span class="card-meta">Tier: Sovereign</span>
-                    <h3>Continuous Partnership</h3>
-                    <p>Dedicated neural scaling and priority infrastructure access. Monthly subscription for long-term strategic growth.</p>
-                    <div class="card-footer">Monthly Retainer</div>
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <footer style="padding: 60px 0; text-align: center; opacity: 0.2; font-size: 10px; letter-spacing: 0.5em; text-transform: uppercase;">
-        Neural Architecture Deployment Platform © 2026
-    </footer>
-
-    <script>
-        // أنيميشن الظهور عند التمرير (Scroll-Triggered Animation)
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('card-show');
-                }
-            });
-        }, { threshold: 0.2 });
-
-        const cards = document.querySelectorAll('.card');
-        cards.forEach((card) => observer.observe(card));
-
-        // زر Deploy Now - تمرير سلس إلى قسم الخدمات فقط (بدون رسائل)
-        const deployBtn = document.getElementById('deployNowBtn');
-        if (deployBtn) {
-            deployBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.querySelector('.services').scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'start' 
-                });
-            });
-        }
-    </script>
-
+        <footer>Neural Architecture Deployment Platform © 2026</footer>
+    </div>
 </body>
 </html>
