@@ -3,104 +3,332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Continuous Partnership | Sovereign Workforce</title>
+    <title>Sovereign Workforce | Institutional AI Deployment</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+
     <style>
+        /* --- المبادئ الإبداعية (نفس الأصل تماماً) --- */
         :root {
             --bg-dark: #000000;
             --text-main: #FFFFFF;
             --text-muted: rgba(255, 255, 255, 0.6);
+            --accent-white: rgba(255, 255, 255, 0.1);
             --font-serif: 'Playfair Display', serif;
             --font-sans: 'Inter', sans-serif;
             --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- الخلفية السيادية --- */
         .bg-layer {
-            position: fixed; inset: 0; z-index: -2;
+            position: fixed;
+            inset: 0;
+            z-index: -2;
             background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2560&auto=format&fit=crop') center/cover no-repeat;
             filter: grayscale(100%) brightness(0.4);
             transform: scale(1.05);
         }
+
         .bg-overlay {
-            position: fixed; inset: 0; z-index: -1;
-            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.9) 100%);
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(180deg, 
+                rgba(0,0,0,0.8) 0%, 
+                rgba(0,0,0,0.2) 50%, 
+                rgba(0,0,0,0.9) 100%);
         }
-        .container { max-width: 1440px; margin: 0 auto; padding: 0 80px; }
-        header { padding: 40px 0; position: relative; z-index: 100; }
-        nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 18px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; color: #fff; }
-        .back-link { display: inline-flex; align-items: center; gap: 8px; margin: 20px 0 40px; text-decoration: none; color: rgba(255,255,255,0.5); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; transition: var(--transition); }
-        .back-link:hover { color: #fff; transform: translateX(-5px); }
-        .page-hero { padding: 40px 0 30px; }
-        .badge { font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.2); padding: 8px 18px; border-radius: 40px; display: inline-block; margin-bottom: 30px; }
-        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(40px, 6vw, 80px); font-weight: 900; line-height: 1.08; letter-spacing: -0.03em; margin-bottom: 20px; }
-        .price-quote { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; margin: 20px 0 40px; letter-spacing: -0.02em; border-left: 3px solid rgba(255,255,255,0.3); padding-left: 30px; }
-        .adaptive-textarea { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.15); border-radius: 24px; padding: 24px 28px; color: #fff; font-family: 'Inter', sans-serif; font-size: 18px; line-height: 1.6; resize: vertical; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); backdrop-filter: blur(5px); margin-bottom: 20px; }
-        .adaptive-textarea:focus { outline: none; border-color: rgba(255,255,255,0.8); box-shadow: 0 0 20px rgba(255,255,255,0.1); background: rgba(255,255,255,0.06); }
-        .button-group { display: flex; gap: 20px; margin-bottom: 50px; }
-        .action-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); padding: 14px 28px; border-radius: 40px; color: #fff; font-size: 14px; font-weight: 500; letter-spacing: 1px; cursor: pointer; transition: var(--transition); backdrop-filter: blur(5px); }
-        .action-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.5); transform: translateY(-2px); }
-        .feature-text { background: rgba(255,255,255,0.02); border-left: 2px solid rgba(255,255,255,0.3); padding: 30px; margin: 40px 0; border-radius: 16px; }
-        .feature-text h2 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 20px; font-weight: 700; letter-spacing: -0.3px; }
-        .feature-text p { color: rgba(255,255,255,0.7); font-size: 18px; line-height: 1.7; }
-        .return-link { text-align: center; margin: 40px 0 80px; }
-        .return-link a { display: inline-block; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 14px 32px; border-radius: 40px; text-decoration: none; color: rgba(255,255,255,0.5); font-size: 13px; letter-spacing: 2px; transition: var(--transition); }
-        .return-link a:hover { background: rgba(255,255,255,0.1); color: #fff; transform: translateY(-3px); }
-        .meet-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(12px); z-index: 1000; display: none; justify-content: center; align-items: center; }
-        .meet-card { background: rgba(0,0,0,0.95); border: 1px solid rgba(255,255,255,0.2); border-radius: 32px; padding: 40px; width: 400px; text-align: center; }
-        .meet-card h3 { font-family: 'Playfair Display', serif; margin-bottom: 25px; }
-        .meet-card button { background: white; color: black; border: none; padding: 12px 24px; border-radius: 40px; margin: 10px; cursor: pointer; font-weight: 600; }
-        .close-meet { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; }
-        footer { padding: 60px 0; text-align: center; opacity: 0.2; font-size: 10px; letter-spacing: 0.5em; text-transform: uppercase; }
-        @media (max-width: 900px) { .container { padding: 0 30px; } .button-group { flex-direction: column; } }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+
+        /* --- الهيدر --- */
+        header {
+            padding: 40px 0;
+            position: relative;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 45px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 12px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            transition: var(--transition);
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--text-main);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        /* --- القسم الرئيسي --- */
+        .hero {
+            padding: 120px 0 100px;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(50px, 8vw, 110px);
+            font-weight: 900;
+            line-height: 1.02;
+            letter-spacing: -0.03em;
+            margin-bottom: 40px;
+        }
+
+        .hero p {
+            font-size: clamp(18px, 2vw, 22px);
+            max-width: 620px;
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-bottom: 60px;
+        }
+
+        .btn-main {
+            display: inline-block;
+            background: var(--text-main);
+            color: var(--bg-dark);
+            padding: 22px 52px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-main:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(255,255,255,0.1);
+            background: #f0f0f0;
+        }
+
+        /* --- قسم الخدمات --- */
+        .services {
+            padding: 100px 0 150px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            color: var(--text-muted);
+            margin-bottom: 60px;
+            display: block;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 50px 40px;
+            border-radius: 24px;
+            backdrop-filter: blur(15px);
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-12px);
+        }
+
+        .card.featured {
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+        }
+
+        .card-meta {
+            font-size: 10px;
+            font-family: monospace;
+            color: rgba(255,255,255,0.2);
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .card h3 {
+            font-family: var(--font-serif);
+            font-size: 32px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .card p {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-weight: 300;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 25px;
+        }
+
+        /* --- استجابة الهواتف --- */
+        @media (max-width: 1100px) {
+            .grid { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0 40px; }
+        }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 50px; }
+            .container { padding: 0 25px; }
+            header { padding: 25px 0; }
+        }
     </style>
 </head>
 <body>
+
 <div class="bg-layer"></div>
 <div class="bg-overlay"></div>
-<div class="container">
-    <header><nav><a href="test.html" class="logo">SOVEREIGN.AI</a></nav></header>
-    <a href="test.html" class="back-link">← Return to Headquarters</a>
-    <section class="page-hero">
-        <span class="badge">SOVEREIGN TIER</span>
-        <h1>Continuous Partnership</h1>
-        <div class="price-quote">MONTHLY RETAINER</div>
+
+<header>
+    <div class="container">
+        <nav>
+            <a href="test.html" class="logo">Sovereign.AI</a>
+            <ul class="nav-links">
+                <li><a href="test.html">Home</a></li>
+                <li><a href="#">Workforce</a></li>
+                <li><a href="#">Infrastructure</a></li>
+                <li><a href="#">Governance</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <section class="hero">
+        <h1>The Sovereign <br> Workforce.</h1>
+        <p>Deploy autonomous AI agents tailored for high-stakes corporate operations. Precision, security, and elite performance integrated into your existing infrastructure.</p>
+        <div>
+            <button class="btn-main" id="deployNowBtn">Deploy Now</button>
+        </div>
     </section>
-    <textarea class="adaptive-textarea" rows="4" placeholder="Describe your vision, growth targets, or strategic needs..."></textarea>
-    <div class="button-group">
-        <button class="action-btn" id="meetBtnElite">Schedule Meeting</button>
-        <button class="action-btn" id="emailBtnElite">Send Request</button>
-    </div>
-    <div class="feature-text">
-        <h2>THE NEURAL EVOLUTION | Elite Partnership Protocol</h2>
-        <p>The elite option is a strategic alliance that transcends traditional software boundaries; it is a "technological covenant" ensuring you remain at the pinnacle of the digital hierarchy. In this path, your system never stops learning but undergoes a continuous neural evolution to keep pace with the latest global technological advancements. You will receive sovereign dedicated clusters guaranteeing maximum processing priority, along with a dedicated AI Architect as your direct technical consultant to evolve system capabilities and expand its impact. This subscription is not a cost but an insurance policy for your company's future, providing monthly strategic intelligence reports that illuminate hidden growth opportunities, ensuring your technology always remains the most powerful and current on the global stage.</p>
-    </div>
-    <div class="return-link"><a href="test.html">← Return to Headquarters</a></div>
-    <footer>Neural Architecture Deployment Platform © 2026</footer>
-</div>
-<div id="meetModalElite" class="meet-overlay">
-    <div class="meet-card">
-        <h3>Schedule a Strategic Meeting</h3>
-        <button data-time="Monday 10:00 AM">Mon 10:00 AM</button>
-        <button data-time="Wednesday 2:00 PM">Wed 2:00 PM</button>
-        <button data-time="Friday 11:00 AM">Fri 11:00 AM</button>
-        <br><br>
-        <button class="close-meet">Cancel</button>
-    </div>
-</div>
+
+    <section class="services">
+        <span class="section-label">Deployment Models</span>
+        <div class="grid">
+            <!-- البطاقة 1: Ready Blueprints -->
+            <a href="page-ready-blueprints.html" class="card">
+                <span class="card-meta">Tier: Essential</span>
+                <h3>Ready Blueprints</h3>
+                <p>Pre-configured AI structures for immediate implementation. Optimized for general administrative and analytical tasks.</p>
+                <div class="card-footer">Starting at $499</div>
+            </a>
+
+            <!-- البطاقة 2: Custom Engineering -->
+            <a href="page-custom-engineering.html" class="card featured">
+                <span class="card-meta">Tier: Bespoke</span>
+                <h3>Custom Engineering</h3>
+                <p>Deep integration with your specific corporate DNA. Includes a 15-day elite performance and stability guarantee.</p>
+                <div class="card-footer">Custom Quote</div>
+            </a>
+
+            <!-- البطاقة 3: Continuous Partnership -->
+            <a href="page-continuous-partnership.html" class="card">
+                <span class="card-meta">Tier: Sovereign</span>
+                <h3>Continuous Partnership</h3>
+                <p>Dedicated neural scaling and priority infrastructure access. Monthly subscription for long-term strategic growth.</p>
+                <div class="card-footer">Monthly Retainer</div>
+            </a>
+        </div>
+    </section>
+</main>
+
+<footer style="padding: 60px 0; text-align: center; opacity: 0.2; font-size: 10px; letter-spacing: 0.5em; text-transform: uppercase;">
+    Neural Architecture Deployment Platform © 2026
+</footer>
+
 <script>
-    const textarea = document.querySelector('.adaptive-textarea');
-    textarea.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = Math.min(300, this.scrollHeight) + 'px'; });
-    const meetBtn = document.getElementById('meetBtnElite');
-    const modal = document.getElementById('meetModalElite');
-    const closeBtn = document.querySelector('.close-meet');
-    meetBtn.onclick = () => { modal.style.display = 'flex'; };
-    closeBtn.onclick = () => { modal.style.display = 'none'; };
-    document.querySelectorAll('[data-time]').forEach(btn => { btn.onclick = () => { modal.style.display = 'none'; }; });
-    window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
-    const emailBtn = document.getElementById('emailBtnElite');
-    emailBtn.onclick = () => { emailBtn.style.transform = 'scale(0.95)'; setTimeout(() => { emailBtn.style.transform = ''; }, 200); };
+    // زر Deploy Now: تمرير سلس إلى قسم الخدمات
+    const deployBtn = document.getElementById('deployNowBtn');
+    if (deployBtn) {
+        deployBtn.addEventListener('click', () => {
+            document.querySelector('.services').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }
 </script>
+
 </body>
 </html>
