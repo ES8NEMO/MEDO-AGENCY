@@ -13,6 +13,8 @@
             --font-serif: 'Playfair Display', serif;
             --font-sans: 'Inter', sans-serif;
             --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --glass-bg: rgba(255,255,255,0.05);
+            --glass-border: rgba(255,255,255,0.15);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         body { background: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
@@ -56,8 +58,92 @@
         .task-list li { color: var(--text-muted); font-size: 14px; line-height: 1.7; margin-bottom: 10px; display: flex; gap: 10px; }
         .task-list li::before { content: "—"; color: #fff; opacity: 0.6; }
         .micro-card-footer { margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 13px; letter-spacing: 0.5px; color: rgba(255,255,255,0.4); }
-        .adaptive-textarea { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.15); border-radius: 24px; padding: 24px 28px; color: #fff; font-family: 'Inter', sans-serif; font-size: 18px; line-height: 1.6; resize: vertical; transition: all 0.4s; backdrop-filter: blur(5px); margin-bottom: 20px; }
-        .adaptive-textarea:focus { outline: none; border-color: rgba(255,255,255,0.8); box-shadow: 0 0 20px rgba(255,255,255,0.1); background: rgba(255,255,255,0.06); }
+        
+        /* حاوية الـ textarea مع زر الإرسال */
+        .message-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .glass-textarea {
+            width: 100%;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 24px 60px 24px 28px; /* مساحة لليمين للزر */
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            line-height: 1.6;
+            resize: vertical;
+            transition: all 0.4s;
+            backdrop-filter: blur(5px);
+            margin-bottom: 0;
+        }
+        .glass-textarea:focus {
+            outline: none;
+            border-color: rgba(255,255,255,0.8);
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.06);
+        }
+        /* زر الإرسال الدائري (أزرق شفاف) */
+        .send-btn {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 2;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .send-btn:hover {
+            background: rgba(59, 130, 246, 0.9);
+            transform: scale(1.05);
+            border-color: rgba(255,255,255,0.6);
+        }
+        .send-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        /* شريط تمرير زجاجي على طراز Apple OS 26 */
+        .glass-textarea::-webkit-scrollbar {
+            width: 6px;
+        }
+        .glass-textarea::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        .glass-textarea::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .glass-textarea::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.5);
+        }
+        /* Firefox */
+        .glass-textarea {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.3) rgba(255,255,255,0.05);
+        }
+
         .feature-text { background: rgba(255,255,255,0.02); border-left: 2px solid rgba(255,255,255,0.3); padding: 30px; margin: 40px 0; border-radius: 16px; }
         .feature-text h2 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 20px; }
         .feature-text p { color: rgba(255,255,255,0.7); font-size: 18px; line-height: 1.7; }
@@ -71,7 +157,7 @@
         footer { padding: 60px 0; text-align: center; opacity: 0.2; font-size: 10px; letter-spacing: 0.5em; text-transform: uppercase; }
 
         @media (max-width: 1100px) { .grid { grid-template-columns: 1fr 1fr; } .container { padding: 0 40px; } }
-        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } .nav-links { display: none; } .hero h1 { font-size: 50px; } .container { padding: 0 25px; } }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } .nav-links { display: none; } .hero h1 { font-size: 50px; } .container { padding: 0 25px; } .send-btn { width: 38px; height: 38px; bottom: 12px; right: 12px; } .send-btn svg { width: 18px; height: 18px; } .glass-textarea { padding: 20px 50px 20px 20px; } }
     </style>
 </head>
 <body>
@@ -133,26 +219,44 @@
     </div>
 </div>
 
-<!-- صفحة Custom Engineering - بدون أي أزرار داخل textarea -->
+<!-- صفحة Custom Engineering - مع زر إرسال وشريط تمرير زجاجي -->
 <div id="customPage" class="page">
     <div class="container">
         <header><nav><a href="#" class="logo back-to-home">SOVEREIGN.AI</a></nav></header>
         <div class="back-link back-to-home">← Return to Headquarters</div>
         <section class="page-hero"><span class="badge">BESPOKE TIER</span><h1>Custom Engineering</h1><div class="price-quote" style="font-family: 'Playfair Display'; font-size: 32px; font-weight: 700; margin: 20px 0 40px; border-left: 3px solid rgba(255,255,255,0.3); padding-left: 30px;">CUSTOM QUOTE</div></section>
-        <textarea class="adaptive-textarea" rows="4" placeholder="Describe your unique requirements, infrastructure, or strategic goals..."></textarea>
+        
+        <div class="message-container">
+            <textarea class="glass-textarea" rows="4" placeholder="Describe your unique requirements, infrastructure, or strategic goals..."></textarea>
+            <button class="send-btn" aria-label="Send message">
+                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                </svg>
+            </button>
+        </div>
+
         <div class="feature-text"><h2>THE ARCHITECTURAL BUILD | One-Time Deployment Architecture</h2><p>This path is designed for leadership seeking to own a fully sovereign intelligent tool without recurring commitments. We do not merely give you code; we build a "digital mind" extracted from your company's Corporate DNA. Once engineering is complete, full system ownership is transferred to you, operating within your infrastructure with absolute privacy and zero-latency response. This option provides the technical power needed to solve specific complexities, backed by a 15-day elite warranty for neural performance monitoring and output quality auditing, making it the optimal investment for establishing a solid and stable foundation in the world of artificial intelligence.</p></div>
         <div class="return-link"><div class="back-to-home" style="display: inline-block; cursor: pointer; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 14px 32px; border-radius: 40px; color: rgba(255,255,255,0.5); font-size: 13px; letter-spacing: 2px;">← Return to Headquarters</div></div>
         <footer>Neural Architecture Deployment Platform © 2026</footer>
     </div>
 </div>
 
-<!-- صفحة Continuous Partnership - بدون أي أزرار داخل textarea -->
+<!-- صفحة Continuous Partnership - مع زر إرسال وشريط تمرير زجاجي -->
 <div id="partnershipPage" class="page">
     <div class="container">
         <header><nav><a href="#" class="logo back-to-home">SOVEREIGN.AI</a></nav></header>
         <div class="back-link back-to-home">← Return to Headquarters</div>
         <section class="page-hero"><span class="badge">SOVEREIGN TIER</span><h1>Continuous Partnership</h1><div class="price-quote" style="font-family: 'Playfair Display'; font-size: 32px; font-weight: 700; margin: 20px 0 40px; border-left: 3px solid rgba(255,255,255,0.3); padding-left: 30px;">MONTHLY RETAINER</div></section>
-        <textarea class="adaptive-textarea" rows="4" placeholder="Describe your vision, growth targets, or strategic needs..."></textarea>
+        
+        <div class="message-container">
+            <textarea class="glass-textarea" rows="4" placeholder="Describe your vision, growth targets, or strategic needs..."></textarea>
+            <button class="send-btn" aria-label="Send message">
+                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                </svg>
+            </button>
+        </div>
+
         <div class="feature-text"><h2>THE NEURAL EVOLUTION | Elite Partnership Protocol</h2><p>The elite option is a strategic alliance that transcends traditional software boundaries; it is a "technological covenant" ensuring you remain at the pinnacle of the digital hierarchy. In this path, your system never stops learning but undergoes a continuous neural evolution to keep pace with the latest global technological advancements. You will receive sovereign dedicated clusters guaranteeing maximum processing priority, along with a dedicated AI Architect as your direct technical consultant to evolve system capabilities and expand its impact. This subscription is not a cost but an insurance policy for your company's future, providing monthly strategic intelligence reports that illuminate hidden growth opportunities, ensuring your technology always remains the most powerful and current on the global stage.</p></div>
         <div class="return-link"><div class="back-to-home" style="display: inline-block; cursor: pointer; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 14px 32px; border-radius: 40px; color: rgba(255,255,255,0.5); font-size: 13px; letter-spacing: 2px;">← Return to Headquarters</div></div>
         <footer>Neural Architecture Deployment Platform © 2026</footer>
@@ -188,6 +292,22 @@
         document.querySelector('.services')?.scrollIntoView({ behavior: 'smooth' });
     });
 
+    // وظيفة زر الإرسال
+    document.querySelectorAll('.send-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const container = btn.closest('.message-container');
+            const textarea = container.querySelector('textarea');
+            const message = textarea.value.trim();
+            if (message === "") {
+                alert("Please describe your requirements before sending.");
+                return;
+            }
+            alert(`✓ Request sent successfully!\n\nMessage: ${message.substring(0, 200)}${message.length > 200 ? '…' : ''}`);
+            textarea.value = "";
+            textarea.style.height = 'auto';
+        });
+    });
+
     const modal = document.getElementById('meetModal');
     const closeModal = () => modal.style.display = 'none';
     document.querySelector('.close-meet')?.addEventListener('click', closeModal);
@@ -196,7 +316,8 @@
     });
     window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-    document.querySelectorAll('.adaptive-textarea').forEach(ta => {
+    // تكيف ارتفاع textarea تلقائيًا
+    document.querySelectorAll('.glass-textarea').forEach(ta => {
         ta.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = Math.min(300, this.scrollHeight) + 'px'; });
     });
 </script>
