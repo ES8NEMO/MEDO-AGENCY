@@ -58,9 +58,6 @@
         .micro-card-footer { margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 13px; letter-spacing: 0.5px; color: rgba(255,255,255,0.4); }
         .adaptive-textarea { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.15); border-radius: 24px; padding: 24px 28px; color: #fff; font-family: 'Inter', sans-serif; font-size: 18px; line-height: 1.6; resize: vertical; transition: all 0.4s; backdrop-filter: blur(5px); margin-bottom: 20px; }
         .adaptive-textarea:focus { outline: none; border-color: rgba(255,255,255,0.8); box-shadow: 0 0 20px rgba(255,255,255,0.1); background: rgba(255,255,255,0.06); }
-        .button-group { display: flex; gap: 20px; margin-bottom: 50px; }
-        .action-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); padding: 14px 28px; border-radius: 40px; color: #fff; font-size: 14px; font-weight: 500; letter-spacing: 1px; cursor: pointer; transition: var(--transition); }
-        .action-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.5); transform: translateY(-2px); }
         .feature-text { background: rgba(255,255,255,0.02); border-left: 2px solid rgba(255,255,255,0.3); padding: 30px; margin: 40px 0; border-radius: 16px; }
         .feature-text h2 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 20px; }
         .feature-text p { color: rgba(255,255,255,0.7); font-size: 18px; line-height: 1.7; }
@@ -72,8 +69,39 @@
         .meet-card button { background: white; color: black; border: none; padding: 12px 24px; border-radius: 40px; margin: 10px; cursor: pointer; font-weight: 600; }
         .close-meet { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; }
         footer { padding: 60px 0; text-align: center; opacity: 0.2; font-size: 10px; letter-spacing: 0.5em; text-transform: uppercase; }
+
+        /* زر السهم الأسود داخل دائرة بيضاء (الزاوية السفلية أقصى اليسار) */
+        .back-arrow-circle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 48px;
+            height: 48px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .back-arrow-circle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .back-arrow-circle svg {
+            width: 24px;
+            height: 24px;
+            display: block;
+            stroke: black;
+            stroke-width: 2;
+            fill: none;
+        }
+
         @media (max-width: 1100px) { .grid { grid-template-columns: 1fr 1fr; } .container { padding: 0 40px; } }
-        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } .nav-links { display: none; } .hero h1 { font-size: 50px; } .container { padding: 0 25px; } }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } .nav-links { display: none; } .hero h1 { font-size: 50px; } .container { padding: 0 25px; } .back-arrow-circle { width: 40px; height: 40px; bottom: 20px; left: 20px; } .back-arrow-circle svg { width: 20px; height: 20px; } }
     </style>
 </head>
 <body>
@@ -135,37 +163,44 @@
     </div>
 </div>
 
-<!-- صفحة Custom Engineering -->
+<!-- صفحة Custom Engineering - تم حذف أزرار Schedule Meeting و Send Request، وتمت إضافة زر السهم -->
 <div id="customPage" class="page">
     <div class="container">
         <header><nav><a href="#" class="logo back-to-home">SOVEREIGN.AI</a></nav></header>
         <div class="back-link back-to-home">← Return to Headquarters</div>
         <section class="page-hero"><span class="badge">BESPOKE TIER</span><h1>Custom Engineering</h1><div class="price-quote" style="font-family: 'Playfair Display'; font-size: 32px; font-weight: 700; margin: 20px 0 40px; border-left: 3px solid rgba(255,255,255,0.3); padding-left: 30px;">CUSTOM QUOTE</div></section>
         <textarea class="adaptive-textarea" rows="4" placeholder="Describe your unique requirements, infrastructure, or strategic goals..."></textarea>
-        <div class="button-group"><button class="action-btn meet-btn">Schedule Meeting</button><button class="action-btn email-btn">Send Request</button></div>
+        <!-- تم حذف button-group بالكامل -->
         <div class="feature-text"><h2>THE ARCHITECTURAL BUILD | One-Time Deployment Architecture</h2><p>This path is designed for leadership seeking to own a fully sovereign intelligent tool without recurring commitments. We do not merely give you code; we build a "digital mind" extracted from your company's Corporate DNA. Once engineering is complete, full system ownership is transferred to you, operating within your infrastructure with absolute privacy and zero-latency response. This option provides the technical power needed to solve specific complexities, backed by a 15-day elite warranty for neural performance monitoring and output quality auditing, making it the optimal investment for establishing a solid and stable foundation in the world of artificial intelligence.</p></div>
         <div class="return-link"><div class="back-to-home" style="display: inline-block; cursor: pointer; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 14px 32px; border-radius: 40px; color: rgba(255,255,255,0.5); font-size: 13px; letter-spacing: 2px;">← Return to Headquarters</div></div>
         <footer>Neural Architecture Deployment Platform © 2026</footer>
     </div>
 </div>
 
-<!-- صفحة Continuous Partnership -->
+<!-- صفحة Continuous Partnership - تم حذف أزرار Schedule Meeting و Send Request، وتمت إضافة زر السهم -->
 <div id="partnershipPage" class="page">
     <div class="container">
         <header><nav><a href="#" class="logo back-to-home">SOVEREIGN.AI</a></nav></header>
         <div class="back-link back-to-home">← Return to Headquarters</div>
         <section class="page-hero"><span class="badge">SOVEREIGN TIER</span><h1>Continuous Partnership</h1><div class="price-quote" style="font-family: 'Playfair Display'; font-size: 32px; font-weight: 700; margin: 20px 0 40px; border-left: 3px solid rgba(255,255,255,0.3); padding-left: 30px;">MONTHLY RETAINER</div></section>
         <textarea class="adaptive-textarea" rows="4" placeholder="Describe your vision, growth targets, or strategic needs..."></textarea>
-        <div class="button-group"><button class="action-btn meet-btn">Schedule Meeting</button><button class="action-btn email-btn">Send Request</button></div>
+        <!-- تم حذف button-group بالكامل -->
         <div class="feature-text"><h2>THE NEURAL EVOLUTION | Elite Partnership Protocol</h2><p>The elite option is a strategic alliance that transcends traditional software boundaries; it is a "technological covenant" ensuring you remain at the pinnacle of the digital hierarchy. In this path, your system never stops learning but undergoes a continuous neural evolution to keep pace with the latest global technological advancements. You will receive sovereign dedicated clusters guaranteeing maximum processing priority, along with a dedicated AI Architect as your direct technical consultant to evolve system capabilities and expand its impact. This subscription is not a cost but an insurance policy for your company's future, providing monthly strategic intelligence reports that illuminate hidden growth opportunities, ensuring your technology always remains the most powerful and current on the global stage.</p></div>
         <div class="return-link"><div class="back-to-home" style="display: inline-block; cursor: pointer; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 14px 32px; border-radius: 40px; color: rgba(255,255,255,0.5); font-size: 13px; letter-spacing: 2px;">← Return to Headquarters</div></div>
         <footer>Neural Architecture Deployment Platform © 2026</footer>
     </div>
 </div>
 
-<!-- Overlay للمواعيد -->
+<!-- Overlay للمواعيد (بقي كما هو لكن الأزرار حذفت من الصفحات، لكن المودال موجود للاستخدام إن أردت لاحقًا) -->
 <div id="meetModal" class="meet-overlay">
     <div class="meet-card"><h3>Schedule a Strategic Meeting</h3><button data-time="Monday 10:00 AM">Mon 10:00 AM</button><button data-time="Wednesday 2:00 PM">Wed 2:00 PM</button><button data-time="Friday 11:00 AM">Fri 11:00 AM</button><br><br><button class="close-meet">Cancel</button></div>
+</div>
+
+<!-- زر السهم الأسود داخل دائرة بيضاء (في الزاوية السفلية أقصى اليسار) -->
+<div class="back-arrow-circle" id="globalBackArrow">
+    <svg viewBox="0 0 24 24" stroke="black" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 18l-6-6 6-6"/>
+    </svg>
 </div>
 
 <script>
@@ -191,6 +226,11 @@
         btn.addEventListener('click', () => showPage('homePage'));
     });
 
+    // زر السهم الثابت في الزاوية
+    document.getElementById('globalBackArrow')?.addEventListener('click', () => {
+        showPage('homePage');
+    });
+
     // زر Deploy Now في الصفحة الرئيسية: ينزلق إلى الخدمات
     document.getElementById('deployNowBtn')?.addEventListener('click', () => {
         document.querySelector('.services')?.scrollIntoView({ behavior: 'smooth' });
@@ -207,14 +247,6 @@
         btn.addEventListener('click', closeModal);
     });
     window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-
-    // تأثير زر البريد (وميض)
-    document.querySelectorAll('.email-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            btn.style.transform = 'scale(0.95)';
-            setTimeout(() => btn.style.transform = '', 200);
-        });
-    });
 
     // تكيف صناديق النص
     document.querySelectorAll('.adaptive-textarea').forEach(ta => {
