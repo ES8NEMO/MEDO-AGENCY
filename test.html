@@ -103,7 +103,7 @@
         .submit-form-btn:hover { transform: scale(0.98); background: #eaeaea; }
         .close-form { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 40px; cursor: pointer; width: 100%; margin-top: 15px; transition: 0.2s; }
         .close-form:hover { background: rgba(255,255,255,0.1); }
-        .error-msg { color: #ff8888; font-size: 12px; margin-top: 5px; display: none; }
+        .error-msg { color: #ff8888; font-size: 12px; margin-top: 5px; display: none; text-align: center; margin-bottom: 10px; }
 
         @media (max-width: 1100px) { .grid { grid-template-columns: 1fr 1fr; } .container { padding: 0 40px; } }
         @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } .nav-links { display: none; } .hero h1 { font-size: 50px; } .container { padding: 0 25px; } .detail-header h2 { font-size: 36px; } .limit-list li strong { min-width: 100px; } .form-card { padding: 30px 20px; } }
@@ -135,10 +135,10 @@
     </div>
 </div>
 
-<!-- صفحات التفاصيل الخاصة بكل Blueprint سيتم إنشاؤها ديناميكياً ولكن نضيف حاوية عامة -->
+<!-- صفحات التفاصيل الخاصة بكل Blueprint سيتم إنشاؤها ديناميكياً -->
 <div id="blueprintDetailContainer" class="page"></div>
 
-<!-- باقي الصفحات (Custom + Partnership) تبقى كما هي -->
+<!-- باقي الصفحات (Custom + Partnership) -->
 <div id="customPage" class="page">
     <div class="container"><header><nav><a href="#" class="logo back-to-home">SOVEREIGN.AI</a></nav></header><div class="back-link back-to-home">← Return to Headquarters</div><section><span class="badge">BESPOKE TIER</span><h1>Custom Engineering</h1><div class="price-quote" style="font-family:'Playfair Display';font-size:32px;font-weight:700;margin:20px 0 40px;border-left:3px solid rgba(255,255,255,0.3);padding-left:30px;">CUSTOM QUOTE</div></section><div class="message-container"><textarea class="glass-textarea" rows="4" placeholder="Describe your unique requirements, infrastructure, or strategic goals..."></textarea><button class="send-btn" aria-label="Send message"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button></div><div class="feature-text"><h2>THE ARCHITECTURAL BUILD | One-Time Deployment Architecture</h2><p>This path is designed for leadership seeking to own a fully sovereign intelligent tool without recurring commitments. We do not merely give you code; we build a "digital mind" extracted from your company's Corporate DNA. Once engineering is complete, full system ownership is transferred to you, operating within your infrastructure with absolute privacy and zero-latency response.</p></div><div class="return-link"><div class="back-to-home" style="display: inline-block; cursor: pointer; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 14px 32px; border-radius: 40px; color: rgba(255,255,255,0.5); font-size: 13px; letter-spacing: 2px;">← Return to Headquarters</div></div><footer>Neural Architecture Deployment Platform © 2026</footer></div>
 </div>
@@ -146,22 +146,22 @@
     <div class="container"><header><nav><a href="#" class="logo back-to-home">SOVEREIGN.AI</a></nav></header><div class="back-link back-to-home">← Return to Headquarters</div><section><span class="badge">SOVEREIGN TIER</span><h1>Continuous Partnership</h1><div class="price-quote" style="font-family:'Playfair Display';font-size:32px;font-weight:700;margin:20px 0 40px;border-left:3px solid rgba(255,255,255,0.3);padding-left:30px;">MONTHLY RETAINER</div></section><div class="message-container"><textarea class="glass-textarea" rows="4" placeholder="Describe your vision, growth targets, or strategic needs..."></textarea><button class="send-btn" aria-label="Send message"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button></div><div class="feature-text"><h2>THE NEURAL EVOLUTION | Elite Partnership Protocol</h2><p>The elite option is a strategic alliance that transcends traditional software boundaries; it is a "technological covenant" ensuring you remain at the pinnacle of the digital hierarchy. You will receive sovereign dedicated clusters guaranteeing maximum processing priority, along with a dedicated AI Architect as your direct technical consultant.</p></div><div class="return-link"><div class="back-to-home" style="display: inline-block; cursor: pointer; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 14px 32px; border-radius: 40px; color: rgba(255,255,255,0.5); font-size: 13px; letter-spacing: 2px;">← Return to Headquarters</div></div><footer>Neural Architecture Deployment Platform © 2026</footer></div>
 </div>
 
-<!-- Modal خاص بنموذج الطلب (اسم، رقم، ايميل) -->
+<!-- Modal خاص بنموذج الطلب (اسم، رقم، ايميل) عمودي -->
 <div id="requestModal" class="request-form-modal">
     <div class="form-card">
-        <h3>Request Deployment</h3>
-        <p>Fill your details to initiate the blueprint activation</p>
+        <h3>Request Assistant</h3>
+        <p>Fill your details to activate the blueprint</p>
         <div class="input-group"><label>FULL NAME *</label><input type="text" id="reqName" placeholder="Ahmed Al Mansoori"></div>
         <div class="input-group"><label>PHONE NUMBER *</label><input type="tel" id="reqPhone" placeholder="+971 XX XXX XXXX"></div>
         <div class="input-group"><label>EMAIL ADDRESS *</label><input type="email" id="reqEmail" placeholder="client@domain.com"></div>
-        <div class="error-msg" id="formError" style="color:#ff7777; text-align:center; margin-bottom:10px;">All fields are required.</div>
+        <div class="error-msg" id="formError">All fields are required & valid email.</div>
         <button class="submit-form-btn" id="submitRequestBtn">Send Request →</button>
         <button class="close-form" id="closeModalBtn">Cancel</button>
     </div>
 </div>
 
 <script>
-    // بيانات البطاقات الستة مع تفاصيل متقدمة وحدود الخدمة
+    // بيانات البطاقات الستة مع تفاصيل متقدمة وحدود الخدمة (نفس المحتوى السابق)
     const blueprintsData = [
         { id: "receptionist", name: "Digital Receptionist", desc: "Intelligent virtual receptionist that handles all front-desk communications, call routing, appointment scheduling, and multilingual assistance 24/7. Elevates first-impression excellence.", limits: ["Up to 2,500 interactions/month", "Multilingual support: English, Arabic, French", "Response time < 2 seconds", "Integration: CRM, Email, Calendar", "Monthly analytics report"] },
         { id: "auditor", name: "Fiscal Auditor", desc: "Autonomous financial controller that tracks expenses, categorizes invoices, reconciles bank statements, and generates real-time P&L summaries with zero arithmetic error.", limits: ["Process up to 10,000 transactions/month", "Fraud pattern detection", "Automated tax-ready reports", "Integration with QuickBooks/Xero", "Secure read-only access"] },
@@ -179,7 +179,7 @@
             const card = document.createElement('div');
             card.className = 'micro-card';
             card.setAttribute('data-bpid', bp.id);
-            card.innerHTML = `<h3>${bp.name}</h3><ul class="task-list">${bp.desc.substring(0, 120)}... </ul><div class="micro-card-footer">Click for details →</div>`;
+            card.innerHTML = `<h3>${bp.name}</h3><ul class="task-list"><li>${bp.desc.substring(0, 100)}...</li></ul><div class="micro-card-footer">Click for details →</div>`;
             card.addEventListener('click', (e) => {
                 e.stopPropagation();
                 showBlueprintDetail(bp.id);
@@ -188,7 +188,7 @@
         });
     }
 
-    // عرض صفحة التفاصيل لكل مساعد
+    // عرض صفحة التفاصيل لكل مساعد (مع معلومات و حدود الخدمة و زر الطلب)
     function showBlueprintDetail(blueprintId) {
         const blueprint = blueprintsData.find(b => b.id === blueprintId);
         if (!blueprint) return;
@@ -221,7 +221,7 @@
                 window.scrollTo(0,0);
             });
         });
-        // ربط زر الطلب
+        // ربط زر الطلب لفتح المودال
         const reqBtn = document.getElementById('openRequestFromDetail');
         if(reqBtn) {
             reqBtn.addEventListener('click', () => {
@@ -242,23 +242,20 @@
         modal.style.display = 'flex';
     }
 
-    // إرسال البيانات إلى البريد الإلكتروني باستخدام mailto مع fallback (fetch مع خدمة mock ولكن باستخدام mailto حقيقي)
-    // لضمان الوصول إلى البريد ahmedoubaih6@gmail.com نستخدم mailto مع body مُنسق
+    // إرسال البيانات إلى البريد الإلكتروني ahmedoubaih6@gmail.com
     function sendEmailToClient(name, phone, email, blueprint) {
         const subject = `Sovereign AI Request: ${blueprint}`;
         const body = `Client Request Details:%0A%0AName: ${name}%0APhone: ${phone}%0AEmail: ${email}%0ABlueprint: ${blueprint}%0A%0ASubmitted via Sovereign Workforce Platform.`;
         const mailtoLink = `mailto:ahmedoubaih6@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        // فتح عميل البريد الافتراضي
         window.location.href = mailtoLink;
         return true;
     }
 
-    // إغلاق المودال
     function closeModal() {
         document.getElementById('requestModal').style.display = 'none';
     }
 
-    // معالجة الإرسال
+    // معالجة الإرسال من المودال
     document.addEventListener('click', (e) => {
         if(e.target.id === 'submitRequestBtn') {
             const name = document.getElementById('reqName').value.trim();
@@ -278,22 +275,13 @@
             }
             errorDiv.style.display = 'none';
             // ارسال البيانات إلى البريد المطلوب
-            const success = sendEmailToClient(name, phone, email, currentBlueprintForRequest || "Ready Blueprint");
-            if(success !== false) {
-                alert(`✓ Request for "${currentBlueprintForRequest}" has been sent!\nWe will contact you within 24 hours.`);
-                closeModal();
-                // العودة إلى صفحة البلوبرنتس أو البقاء
-                const activeDetail = document.getElementById('blueprintDetailContainer');
-                if(activeDetail && activeDetail.classList.contains('active')) {
-                    // نبقى في التفاصيل
-                } else {
-                    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                    document.getElementById('blueprintsPage').classList.add('active');
-                }
-                window.scrollTo(0,0);
-            } else {
-                alert('Could not open email client. Please contact directly: ahmedoubaih6@gmail.com');
-            }
+            sendEmailToClient(name, phone, email, currentBlueprintForRequest || "Ready Blueprint");
+            alert(`✓ Request for "${currentBlueprintForRequest}" has been sent!\nWe will contact you within 24 hours.`);
+            closeModal();
+            // بعد الإرسال نعود إلى صفحة البلوبرنتس أو نبقى في التفاصيل (نفضل نرجع للقائمة)
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('blueprintsPage').classList.add('active');
+            window.scrollTo(0,0);
         }
         if(e.target.id === 'closeModalBtn' || e.target.classList.contains('close-form')) {
             closeModal();
@@ -331,10 +319,6 @@
     document.querySelectorAll('.glass-textarea').forEach(ta => {
         ta.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = Math.min(300, this.scrollHeight) + 'px'; });
     });
-    // تأكد من عرض blueprintsPage مع البيانات عند الضغط من البداية
-    if(document.querySelector('.card[data-page="blueprints"]')) {
-        // preload
-    }
     renderBlueprintCards(); // تحضير البيانات
 </script>
 </body>
