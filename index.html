@@ -66,12 +66,6 @@
         .send-btn:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.5); transform: scale(1.02); }
         .send-btn svg { width: 20px; height: 20px; stroke: white; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
         
-        .glass-textarea::-webkit-scrollbar { width: 6px; }
-        .glass-textarea::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; backdrop-filter: blur(10px); }
-        .glass-textarea::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 10px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
-        .glass-textarea::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.5); }
-        .glass-textarea { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.3) rgba(255,255,255,0.05); }
-
         .feature-text { background: rgba(255,255,255,0.02); border-left: 2px solid rgba(255,255,255,0.3); padding: 30px; margin: 40px 0; border-radius: 16px; }
         .feature-text h2 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 20px; }
         .feature-text p { color: rgba(255,255,255,0.7); font-size: 18px; line-height: 1.7; }
@@ -116,8 +110,10 @@
         /* Developer editing styles (only visible in dev mode) */
         .dev-editable { cursor: pointer; transition: 0.2s; position: relative; }
         .dev-editable:hover { background: rgba(255,255,255,0.1); outline: 1px dashed rgba(255,255,255,0.5); }
-        .dev-edit-icon { position: absolute; right: -30px; top: 0; opacity: 0; transition: 0.2s; font-size: 14px; background: rgba(0,0,0,0.7); border-radius: 20px; padding: 2px 8px; pointer-events: none; }
-        .dev-editable:hover .dev-edit-icon { opacity: 1; }
+        .dev-edit-icon, .dev-delete-icon { position: absolute; top: 10px; background: rgba(0,0,0,0.7); border-radius: 20px; padding: 4px 8px; cursor: pointer; font-size: 12px; transition: 0.2s; z-index: 5; }
+        .dev-edit-icon { right: 40px; }
+        .dev-delete-icon { right: 10px; color: #ff8888; }
+        .dev-edit-icon:hover, .dev-delete-icon:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); }
         .dev-add-btn { background: rgba(255,255,255,0.1); border: 1px dashed rgba(255,255,255,0.4); border-radius: 40px; padding: 12px 24px; margin: 20px auto; display: inline-block; cursor: pointer; transition: 0.2s; text-align: center; }
         .dev-add-btn:hover { background: rgba(255,255,255,0.2); border-color: white; }
         .dev-control-bar { position: fixed; bottom: 20px; right: 20px; z-index: 999; background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); border-radius: 60px; padding: 8px 16px; display: flex; gap: 12px; border: 1px solid rgba(255,255,255,0.2); }
@@ -137,7 +133,6 @@
 <div class="bg-overlay"></div>
 <div id="toastMsg" class="toast-notification"></div>
 
-<!-- PHP-like include: the same HTML structure will be duplicated by JS for dev mode -->
 <!-- Original site structure -->
 <div id="homePage" class="page active">
     <div class="container">
@@ -199,7 +194,7 @@
 const DEV_PASSWORD = "MEDO2026";
 let isDevMode = false; // whether editing features are active
 
-// Default content (fallback)
+// Default blueprints (original 6)
 const defaultBlueprints = [
     { id: "rec1", name: "Digital Receptionist", desc: "Intelligent virtual receptionist that handles all front-desk communications, call routing, appointment scheduling, and multilingual assistance 24/7. Elevates first-impression excellence.", limits: ["Up to 2,500 interactions/month", "Multilingual support: English, Arabic, French", "Response time < 2 seconds", "Integration: CRM, Email, Calendar", "Monthly analytics report"] },
     { id: "rec2", name: "Fiscal Auditor", desc: "Autonomous financial controller that tracks expenses, categorizes invoices, reconciles bank statements, and generates real-time P&L summaries with zero arithmetic error.", limits: ["Process up to 10,000 transactions/month", "Fraud pattern detection", "Automated tax-ready reports", "Integration with QuickBooks/Xero", "Secure read-only access"] },
@@ -209,10 +204,7 @@ const defaultBlueprints = [
     { id: "rec6", name: "Operations Coordinator", desc: "Internal workflow optimizer that tracks team tasks, sends automated reminders, organizes cloud files, and ensures seamless administrative operations.", limits: ["Integration with Slack, Asana, Trello", "Unlimited task reminders", "File organization (Google Drive, OneDrive)", "Team capacity insights", "Weekly ops report"] }
 ];
 
-// Global state
 let blueprintsList = [];
-let currentEditingElement = null;
-let currentFieldCallback = null;
 
 // Helper functions
 function showToast(msg, isErr=false) {
@@ -248,7 +240,7 @@ function saveToLocalStorage() {
         partnerFeatureDesc: document.getElementById('partner-feature-desc').innerText
     };
     localStorage.setItem('sovereign_ai_data', JSON.stringify(dataToSave));
-    showToast('All changes saved');
+    showToast('✅ All changes saved');
 }
 
 function loadFromLocalStorage() {
@@ -256,7 +248,7 @@ function loadFromLocalStorage() {
     if(saved) {
         try {
             const data = JSON.parse(saved);
-            if(data.blueprints) blueprintsList = data.blueprints.map(bp => ({ ...bp, id: bp.id || 'bp_'+Date.now()+Math.random() }));
+            if(data.blueprints && data.blueprints.length) blueprintsList = data.blueprints.map(bp => ({ ...bp, id: bp.id || 'bp_'+Date.now()+Math.random() }));
             else blueprintsList = JSON.parse(JSON.stringify(defaultBlueprints));
             document.getElementById('hero-title').innerHTML = data.heroTitle || defaultHeroTitle();
             document.getElementById('hero-desc').innerText = data.heroDesc || defaultHeroDesc();
@@ -288,7 +280,7 @@ function loadFromLocalStorage() {
 function defaultHeroTitle() { return "The Sovereign <br> Workforce."; }
 function defaultHeroDesc() { return "Deploy autonomous AI agents tailored for high-stakes corporate operations. Precision, security, and elite performance integrated into your existing infrastructure."; }
 
-// Render blueprints grid (for both dev and normal mode)
+// Render blueprints grid with edit & delete icons when in dev mode
 function renderBlueprintGrid() {
     const container = document.getElementById('blueprintsDynamicGrid');
     if(!container) return;
@@ -299,38 +291,48 @@ function renderBlueprintGrid() {
         card.setAttribute('data-bpid', bp.id);
         card.innerHTML = `<h3>${escapeHtml(bp.name)}</h3><ul class="task-list"><li>${escapeHtml(bp.desc.substring(0, 100))}...</li></ul><div class="micro-card-footer">Click for details →</div>`;
         if(isDevMode) {
+            // Edit button
             const editBtn = document.createElement('div');
             editBtn.className = 'dev-edit-icon';
             editBtn.innerHTML = '✎';
-            editBtn.style.position = 'absolute';
-            editBtn.style.top = '10px';
-            editBtn.style.right = '10px';
-            editBtn.style.background = 'rgba(0,0,0,0.7)';
-            editBtn.style.padding = '4px 8px';
-            editBtn.style.borderRadius = '20px';
-            editBtn.style.cursor = 'pointer';
-            editBtn.style.fontSize = '12px';
+            editBtn.title = 'Edit blueprint';
             editBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 openBlueprintEditor(bp.id);
             });
             card.appendChild(editBtn);
+            // Delete button
+            const delBtn = document.createElement('div');
+            delBtn.className = 'dev-delete-icon';
+            delBtn.innerHTML = '🗑️';
+            delBtn.title = 'Delete blueprint';
+            delBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if(confirm(`Delete "${bp.name}" permanently?`)) {
+                    blueprintsList = blueprintsList.filter(b => b.id !== bp.id);
+                    renderBlueprintGrid();
+                    saveToLocalStorage();
+                    showToast(`"${bp.name}" deleted`);
+                }
+            });
+            card.appendChild(delBtn);
         }
         card.addEventListener('click', (e) => {
-            if(e.target.closest('.dev-edit-icon')) return;
+            if(e.target.closest('.dev-edit-icon') || e.target.closest('.dev-delete-icon')) return;
             showBlueprintDetail(bp.id);
         });
         container.appendChild(card);
     });
-    if(isDevMode) {
-        const addDiv = document.getElementById('addBlueprintButtonContainer');
-        if(addDiv) {
+    // Add button for dev mode
+    const addDiv = document.getElementById('addBlueprintButtonContainer');
+    if(addDiv) {
+        if(isDevMode) {
             addDiv.innerHTML = '<div class="dev-add-btn" id="addNewBlueprintBtn">+ Add New Blueprint</div>';
-            document.getElementById('addNewBlueprintBtn')?.addEventListener('click', () => openBlueprintEditor(null));
+            const addBtn = document.getElementById('addNewBlueprintBtn');
+            if(addBtn) addBtn.onclick = () => openBlueprintEditor(null);
+        } else {
+            addDiv.innerHTML = '';
         }
-    } else {
-        const addDiv = document.getElementById('addBlueprintButtonContainer');
-        if(addDiv) addDiv.innerHTML = '';
     }
 }
 
@@ -343,11 +345,11 @@ function openBlueprintEditor(blueprintId) {
     const modal = document.createElement('div');
     modal.className = 'inline-edit-overlay';
     modal.style.display = 'flex';
-    modal.innerHTML = `<div class="inline-edit-box" style="max-width:700px;"><h3>${isNew ? 'Add New Blueprint' : 'Edit Blueprint'}</h3>
+    modal.innerHTML = `<div class="inline-edit-box" style="max-width:700px;"><h3>${isNew ? '➕ Add New Blueprint' : '✏️ Edit Blueprint'}</h3>
         <input type="text" id="editBpName" placeholder="Blueprint Name" value="${escapeHtml(name)}" style="width:100%; margin-bottom:15px;">
         <textarea id="editBpDesc" placeholder="Description" rows="3" style="width:100%; margin-bottom:15px;">${escapeHtml(desc)}</textarea>
         <textarea id="editBpLimits" placeholder="Limits (one per line)" rows="4" style="width:100%; margin-bottom:15px;">${escapeHtml(limits)}</textarea>
-        <div><button id="saveBpBtn">Save</button> <button id="cancelBpBtn">Cancel</button></div>
+        <div><button id="saveBpBtn">💾 Save</button> <button id="cancelBpBtn">Cancel</button></div>
     </div>`;
     document.body.appendChild(modal);
     const saveBtn = modal.querySelector('#saveBpBtn');
@@ -358,17 +360,18 @@ function openBlueprintEditor(blueprintId) {
         const newLimits = modal.querySelector('#editBpLimits').value.split('\n').filter(l=>l.trim());
         if(!newName) { showToast('Name required', true); return; }
         if(isNew) {
-            const newId = 'bp_'+Date.now()+'_'+Math.random();
+            const newId = 'bp_'+Date.now()+'_'+Math.random().toString(36).substr(2,6);
             blueprintsList.push({ id: newId, name: newName, desc: newDesc, limits: newLimits.length ? newLimits : ["No limits specified"] });
+            showToast(`✅ "${newName}" added`);
         } else {
             bp.name = newName;
             bp.desc = newDesc;
             bp.limits = newLimits.length ? newLimits : ["No limits specified"];
+            showToast(`✅ "${newName}" updated`);
         }
         renderBlueprintGrid();
         saveToLocalStorage();
         modal.remove();
-        showToast(isNew ? 'Blueprint added' : 'Blueprint updated');
     };
     cancelBtn.onclick = () => modal.remove();
 }
@@ -394,6 +397,8 @@ function showBlueprintDetail(blueprintId) {
     detailContainer.innerHTML = detailHTML;
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     detailContainer.classList.add('active');
+    
+    // Re-attach events for detail page
     document.querySelectorAll('.back-to-blueprints').forEach(el => {
         el.addEventListener('click', (e) => {
             e.preventDefault();
@@ -415,7 +420,7 @@ function openInlineEditor(element, currentText, isHtml=false, onSave) {
     modal.style.display = 'flex';
     const saveBtn = document.getElementById('inlineSaveBtn');
     const cancelBtn = document.getElementById('inlineCancelBtn');
-    const newSave = () => {
+    const saveHandler = () => {
         let newVal = textarea.value;
         if(isHtml) newVal = newVal.replace(/\n/g, '<br>');
         onSave(newVal);
@@ -423,12 +428,12 @@ function openInlineEditor(element, currentText, isHtml=false, onSave) {
         cleanup();
     };
     const cleanup = () => {
-        saveBtn.removeEventListener('click', newSave);
+        saveBtn.removeEventListener('click', saveHandler);
         cancelBtn.removeEventListener('click', cleanup);
     };
-    saveBtn.removeEventListener('click', newSave);
+    saveBtn.removeEventListener('click', saveHandler);
     cancelBtn.removeEventListener('click', cleanup);
-    saveBtn.addEventListener('click', newSave);
+    saveBtn.addEventListener('click', saveHandler);
     cancelBtn.addEventListener('click', cleanup);
 }
 
@@ -450,9 +455,8 @@ function enableEditingOnElements() {
             });
         }
     });
-    // Also make price-quote text editable (static)
-    const quotes = document.querySelectorAll('.price-quote');
-    quotes.forEach(q => {
+    // price-quote elements (static in custom & partnership pages)
+    document.querySelectorAll('.price-quote').forEach(q => {
         if(!q.hasAttribute('data-dev-listener')) {
             q.setAttribute('data-dev-listener', 'true');
             q.classList.add('dev-editable');
@@ -465,7 +469,6 @@ function enableEditingOnElements() {
 
 function enterDevMode() {
     isDevMode = true;
-    // Add floating control bar
     let controlBar = document.getElementById('devControlBar');
     if(!controlBar) {
         controlBar = document.createElement('div');
@@ -480,11 +483,11 @@ function enterDevMode() {
         });
     }
     enableEditingOnElements();
-    renderBlueprintGrid(); // re-render with edit icons
-    showToast('Developer Mode Active: Click any text to edit, + to add blueprints');
+    renderBlueprintGrid(); // re-render with edit/delete icons
+    showToast('Developer Mode Active: Click any text to edit, ✎ to edit blueprint, 🗑️ to delete');
 }
 
-// Email & modal functions (unchanged from original)
+// ---------- Email & Request Functions (global delegation to ensure reliability) ----------
 async function sendEmailViaFormSubmit(name, phone, email, service, userMessage) {
     const formData = new FormData();
     formData.append('name', name); formData.append('phone', phone); formData.append('email', email);
@@ -496,6 +499,7 @@ async function sendEmailViaFormSubmit(name, phone, email, service, userMessage) 
         else { showToast('Failed to send.', true); return false; }
     } catch(e) { showToast('Network error.', true); return false; }
 }
+
 let currentServiceForRequest = '', pendingMessageContent = '';
 function openRequestForm(serviceName, additionalMessage) {
     currentServiceForRequest = serviceName; pendingMessageContent = additionalMessage;
@@ -505,6 +509,22 @@ function openRequestForm(serviceName, additionalMessage) {
     modal.style.display = 'flex';
 }
 function closeModal() { document.getElementById('requestModal').style.display = 'none'; }
+
+// Use event delegation for send buttons (custom & partnership) to survive re-renders
+document.body.addEventListener('click', (e) => {
+    const sendBtn = e.target.closest('.custom-send-trigger, .partnership-send-trigger');
+    if(sendBtn) {
+        const container = sendBtn.closest('.message-container');
+        const textarea = container?.querySelector('textarea');
+        const message = textarea?.value.trim();
+        const serviceName = sendBtn.getAttribute('data-service');
+        if(!message) { showToast('Please describe your requirements.', true); return; }
+        openRequestForm(serviceName, message);
+    }
+    // close modal if clicked outside
+    if(e.target === document.getElementById('requestModal')) closeModal();
+});
+
 document.getElementById('closeModalBtn')?.addEventListener('click', closeModal);
 document.getElementById('submitRequestBtn')?.addEventListener('click', async () => {
     const name = document.getElementById('reqName').value.trim();
@@ -520,19 +540,24 @@ document.getElementById('submitRequestBtn')?.addEventListener('click', async () 
     btn.innerHTML = '<span class="loading-spinner"></span> Sending...'; btn.disabled = true;
     const success = await sendEmailViaFormSubmit(name, phone, email, currentServiceForRequest, pendingMessageContent);
     btn.innerHTML = originalText; btn.disabled = false;
-    if(success) { closeModal(); if(currentServiceForRequest === 'Custom Engineering' || currentServiceForRequest === 'Continuous Partnership') { const activePage = document.querySelector('.page.active'); if(activePage) { const ta = activePage.querySelector('.glass-textarea'); if(ta) ta.value = ''; } } else { document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); document.getElementById('blueprintsPage').classList.add('active'); } window.scrollTo(0,0); pendingMessageContent = ''; }
-});
-document.querySelectorAll('.custom-send-trigger, .partnership-send-trigger').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const textarea = btn.closest('.message-container')?.querySelector('textarea');
-        const message = textarea?.value.trim();
-        const serviceName = btn.getAttribute('data-service');
-        if(!message) { showToast('Please describe your requirements.', true); return; }
-        openRequestForm(serviceName, message);
-    });
+    if(success) {
+        closeModal();
+        if(currentServiceForRequest === 'Custom Engineering' || currentServiceForRequest === 'Continuous Partnership') {
+            const activePage = document.querySelector('.page.active');
+            if(activePage) {
+                const ta = activePage.querySelector('.glass-textarea');
+                if(ta) ta.value = '';
+            }
+        } else {
+            document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+            document.getElementById('blueprintsPage').classList.add('active');
+        }
+        window.scrollTo(0,0);
+        pendingMessageContent = '';
+    }
 });
 
-// Navigation logic
+// Navigation
 function showPage(pageId) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById(pageId).classList.add('active');
@@ -541,7 +566,7 @@ function showPage(pageId) {
 document.querySelectorAll('.card[data-page]').forEach(card => {
     card.addEventListener('click', () => {
         const page = card.getAttribute('data-page');
-        if(page === 'blueprints') { showPage('blueprintsPage'); }
+        if(page === 'blueprints') showPage('blueprintsPage');
         else if(page === 'custom') showPage('customPage');
         else if(page === 'partnership') showPage('partnershipPage');
     });
@@ -549,10 +574,8 @@ document.querySelectorAll('.card[data-page]').forEach(card => {
 document.querySelectorAll('.back-to-home').forEach(btn => btn.addEventListener('click', () => showPage('homePage')));
 document.getElementById('deployNowBtn')?.addEventListener('click', () => document.querySelector('.services')?.scrollIntoView({ behavior: 'smooth' }));
 
-// Initialization
 function init() {
     loadFromLocalStorage();
-    // check for dev mode via hash or path
     const isDevRequest = window.location.pathname.endsWith('/dev') || window.location.hash === '#dev';
     const devModeStored = localStorage.getItem('devModeActive') === 'true';
     if(isDevRequest && !devModeStored) {
@@ -575,7 +598,7 @@ function init() {
     } else {
         isDevMode = false;
     }
-    // event listeners for textareas resizing
+    // resize textareas
     document.querySelectorAll('.glass-textarea').forEach(ta => {
         ta.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = Math.min(300, this.scrollHeight) + 'px'; });
     });
